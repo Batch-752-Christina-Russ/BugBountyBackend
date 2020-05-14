@@ -1,0 +1,29 @@
+package com.revature.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="User")
+public class User {
+
+	@Id
+	@SequenceGenerator(name="userid_seq", allocationSize = 1)
+	@GeneratedValue(generator="userid_seq", strategy = GenerationType.AUTO)
+	@Column(name="user_id")
+	private int id;
+	@Column(unique=true, name="username")
+	private String username;
+	@Column(name="password")
+	private String password;
+	@Column(name="points")
+	private int points;
+	@ManyToOne
+	private Role role;
+}

@@ -1,0 +1,6 @@
+#database credentials
+spring.datasource.url=jdbc:postgresql://bugbounty.cfw8oj8kd7gr.us-east-2.rds.amazonaws.com:5432/bugBounty
+spring.datasource.username=postgres
+spring.datasource.password=postgres
+
+server.port=8085

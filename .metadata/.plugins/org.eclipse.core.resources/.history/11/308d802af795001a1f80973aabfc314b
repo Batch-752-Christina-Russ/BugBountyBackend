@@ -1,0 +1,10 @@
+package com.revature.model;
+
+public class User {
+
+	private int id;
+	private String username;
+	private String password;
+	private int points;
+	private Role role;
+}

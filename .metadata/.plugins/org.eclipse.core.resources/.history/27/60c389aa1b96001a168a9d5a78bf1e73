@@ -1,0 +1,23 @@
+package com.revature.driver;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.revature.model.Role;
+import com.revature.model.User;
+import com.revature.service.BugReportService;
+import com.revature.service.UserService;
+
+@SpringBootApplication
+public class BugBountyBeApplication {
+
+	public static void main(String[] args) {
+		//SpringApplication.run(BugBountyBeApplication.class, args);
+		
+		UserService us = new UserService();
+		BugReportService brs = new BugReportService();
+		
+		User derp = new User(0, "Derpvin", "pass", 100000000, new Role(1, "admin"));
+		System.out.println(us.getAllUsers());
+	}
+
+}
