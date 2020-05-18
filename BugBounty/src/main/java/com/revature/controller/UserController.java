@@ -19,13 +19,12 @@ import com.revature.service.UserService;
 @RequestMapping(path = "/user")
 public class UserController {
 
-	@Autowired
 	private UserService userService;
 	
-//	@Autowired
-//	public UserController(UserService userService) {
-//		this.userService = userService;
-//	}
+	@Autowired
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
 	
 	@GetMapping(path="/test", produces = MediaType.TEXT_HTML_VALUE)
 	public String test() {
@@ -40,5 +39,12 @@ public class UserController {
 	@PostMapping(path="/save", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void saveUser(@RequestBody User user) {
 		this.userService.saveUser(user);
+	}
+	
+	@PostMapping(path="/login", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public User login(@RequestBody User u) {
+		u = this.userService.login(u.getUsername(), u.getPassword());
+		u.setPassword(null);
+		return u;
 	}
 }
