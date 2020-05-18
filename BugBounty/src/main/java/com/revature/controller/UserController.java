@@ -41,10 +41,17 @@ public class UserController {
 		this.userService.saveUser(user);
 	}
 	
+
 	@PostMapping(path="/login", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public User login(@RequestBody User u) {
 		u = this.userService.login(u.getUsername(), u.getPassword());
 		u.setPassword(null);
 		return u;
+	}
+
+	@GetMapping(path="/topten", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<User> getTopTen()
+	{
+		return this.userService.getTopTen();
 	}
 }
