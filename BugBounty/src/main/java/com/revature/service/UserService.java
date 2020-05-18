@@ -21,5 +21,9 @@ public class UserService {
 	public void saveUser(User user) {
 		this.userRepository.save(user);
 	}
+
+	public List<User> getTopTen() {
+		return this.userRepository.findFirst10ByOrderByPointsDesc();
+	}
 	
 }

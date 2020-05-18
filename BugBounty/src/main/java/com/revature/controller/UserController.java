@@ -41,4 +41,10 @@ public class UserController {
 	public void saveUser(@RequestBody User user) {
 		this.userService.saveUser(user);
 	}
+	
+	@GetMapping(path="/topten", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<User> getTopTen()
+	{
+		return this.userService.getTopTen();
+	}
 }
