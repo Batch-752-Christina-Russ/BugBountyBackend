@@ -1,6 +1,7 @@
 package com.revature.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,11 @@ public class BugReportService {
 		return this.bugReportRepository.findById(id);
 	}
 	
-	public void saveBugReport(BugReport bugReport) {
-		this.bugReportRepository.save(bugReport);
+	public boolean saveBugReport(BugReport bugReport) {
+		Optional<BugReport> bug = Optional.ofNullable(this.bugReportRepository.save(bugReport));
+		if( bug.isPresent()) {
+			return true;
+		} else return false;
 	}
 	
 	public void deleteBugReport(int id) {
