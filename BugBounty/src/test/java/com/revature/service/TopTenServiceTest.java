@@ -54,6 +54,7 @@ public class TopTenServiceTest {
 	
 	@Test
 	public void testGetTopTen() {
+		//TDD, methods do not yet exist
 		Mockito.when(this.userRepository.findFirst10ByOrderByPointsDesc()).thenReturn(top10);
 		
 		//return a list of Users
