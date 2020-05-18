@@ -2,17 +2,16 @@ package com.revature.controller;
 
 import org.testng.annotations.Test;
 
-import com.revature.model.Role;
-import com.revature.model.User;
+import com.google.gson.Gson;
 import com.revature.service.UserService;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import javax.persistence.Column;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -39,10 +38,11 @@ public class LeaderBoardUserRankController {
 	
 	// the user rank function returns a generic object with these fields
 	class ObjectFromRankAndUser{
-		int points = 150;
-		String username = "bob";
 		int rank = 5;	
+		public String username = "bob";
+		int points = 150;
 		ObjectFromRankAndUser() {};
+		
 	}
   
 	@BeforeClass
@@ -51,18 +51,21 @@ public class LeaderBoardUserRankController {
 		MockitoAnnotations.initMocks(this);
 		mockMVC = MockMvcBuilders.standaloneSetup(testController).build();
 		object = new ObjectFromRankAndUser();
-		when(userService.getRankAndUser()).thenReturn(object);	
+		when(this.userService.getRankAndUser("bob")).thenReturn(object);	
+		
 	}
   
 	@Test
-	public void f() {
+	public void testTheUserRankController() {
 		try {
-			mockMVC.perform(get("/user/userrank")).andExpect(status().isOk())
-			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			.andDo(print()).andReturn();
-		} catch(Exception e) {
+			mockMVC.perform(get("/user/userrank" + "/bob"))
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+			.andDo(print())
+			.andReturn();
+		}catch(Exception e) {
 			e.printStackTrace();
-		}	
+		}
 	}
 }
 

@@ -5,9 +5,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
-
-import java.util.Optional;
 
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -16,10 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 //import org.mockito.Mock;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.revature.model.Role;
-import com.revature.model.User;
 import com.revature.repository.UserRepository;
-import com.revature.service.UserService;
 
 @SpringBootTest
 class LeaderBoardUserRankService {
@@ -48,7 +42,5 @@ class LeaderBoardUserRankService {
 		
 		// check that the service layer is passing a generic object.
 		assertEquals(object, this.userService.getRankAndUser("IAmTheRightTestUser"));
-		
-		fail("Not yet implemented"); // remove this once they are implemented.
 	}
 }
