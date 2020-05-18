@@ -26,4 +26,8 @@ public class UserService {
 		return this.userRepository.findFirst10ByOrderByPointsDesc();
 	}
 	
+	public User login(String username, String password) {
+		return this.userRepository.findByUsernameAndPassword(username, password);
+	}
+	
 }
