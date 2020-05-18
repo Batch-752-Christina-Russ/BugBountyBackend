@@ -49,10 +49,10 @@ public class UserController {
 		u = this.userService.login(u.getUsername(), u.getPassword());
 		u.setPassword(null);
 		return u;
-
 	}
 	
 	@GetMapping(path="/userrank/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> getRankAndUser(@PathVariable String username) {
 		return new ResponseEntity<>(this.userService.getRankAndUser(username), HttpStatus.OK);
 	}
+}

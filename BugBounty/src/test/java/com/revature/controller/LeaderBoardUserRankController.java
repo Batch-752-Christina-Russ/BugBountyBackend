@@ -47,7 +47,7 @@ public class LeaderBoardUserRankController {
   
 	@BeforeClass
 	public void beforeClass() {
-		testController = new UserController();
+		testController = new UserController(userService);
 		MockitoAnnotations.initMocks(this);
 		mockMVC = MockMvcBuilders.standaloneSetup(testController).build();
 		object = new ObjectFromRankAndUser();
