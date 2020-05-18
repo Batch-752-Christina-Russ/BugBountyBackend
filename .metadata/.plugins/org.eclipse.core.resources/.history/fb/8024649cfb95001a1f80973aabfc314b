@@ -1,8 +1,0 @@
-package com.revature.repository;
-
-import org.springframework.stereotype.Repository;
-
-@Repository("userRepository")
-public class UserRepository extends JpaRepository<User, Integer>{
-
-}
