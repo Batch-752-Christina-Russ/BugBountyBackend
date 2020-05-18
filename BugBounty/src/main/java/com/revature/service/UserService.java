@@ -22,7 +22,12 @@ public class UserService {
 		this.userRepository.save(user);
 	}
 	
-	public Object getRankAndUser(String username) {
-		return this.userRepository.getRankByUserNameOrderByPoints(username);
+	public User login(String username, String password) {
+		return this.userRepository.findByUsernameAndPassword(username, password);
 	}
+
+	public Object getRankAndUser(String username) {
+	return this.userRepository.getRankByUserNameOrderByPoints(username);
+}
+
 }

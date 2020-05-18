@@ -93,11 +93,10 @@
             <version>6.14.3</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-		<dependency>
-		    <groupId>com.google.code.gson</groupId>
-		    <artifactId>gson</artifactId>
-		    <version>2.8.5</version>
+        <dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.5</version>
 		</dependency>
 	</dependencies>
 
@@ -107,6 +106,11 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+            	<groupId>org.apache.maven.plugins</groupId>
+           		<artifactId>maven-jar-plugin</artifactId>
+           <version>3.1.1</version>
+</plugin>
 		</plugins>
 	</build>
 
