@@ -32,6 +32,18 @@ public class BugReportService {
 
 	public Integer sumBugReport(int id) {
 		BugReport br = this.bugReportRepository.findById(id);
-		return this.bugReportService.calculateTimePoints(br) + this.bugReportService.calculateSeverityPoints(br);
+		return this.calculateTimePoints(br) + this.calculateSeverityPoints(br);
+	}
+
+	private int calculateSeverityPoints(BugReport br) {
+		//   returns static values for Severity static values for severity low - 5, med - 15, high - 25, critical - 50
+		switch(br.getSeverity()){
+		case "low": return 5;
+	    case "med":  return 15;
+	    case "high": return 25;
+	    case "critical":  return 50;
+	    default: return 0;
+	}
+	
 	}
 }
