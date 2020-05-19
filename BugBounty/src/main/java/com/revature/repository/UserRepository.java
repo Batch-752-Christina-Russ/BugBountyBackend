@@ -18,6 +18,11 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	List<User> findFirst10ByOrderByPointsDesc();
 
 	User findByUsernameAndPassword(String username, String password);
-
+	
+	public final static String GetRanked = "with ordered as (select username, points, "
+			+ "rank () over (order by points desc) ranks from users) select ranks, username, points from ordered where username =?1";
+	
+	@Query(value=GetRanked, nativeQuery = true)
+	public Object getRankByUserNameOrderByPoints(String username);
 
 }
