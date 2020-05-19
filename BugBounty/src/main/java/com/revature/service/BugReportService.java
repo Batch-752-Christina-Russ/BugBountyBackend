@@ -48,6 +48,7 @@ public class BugReportService {
 	    case "high": return 25;
 	    case "critical":  return 50;
 	    default: return 0;
+		}
 	}
 	
 
