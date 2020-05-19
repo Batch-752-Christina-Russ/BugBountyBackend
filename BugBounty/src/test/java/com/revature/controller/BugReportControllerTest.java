@@ -61,7 +61,7 @@ public class BugReportControllerTest {
   
 	@Test
 	public void testGetAllPending() {
-		Mockito.when(this.bugReportService.findAllBugReports()).thenReturn(pendingBugReports);
+		Mockito.when(this.bugReportService.findByStatus("pending")).thenReturn(pendingBugReports);
 		try {
 			mockMvc.perform(get("/bugreport/pending")).andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))

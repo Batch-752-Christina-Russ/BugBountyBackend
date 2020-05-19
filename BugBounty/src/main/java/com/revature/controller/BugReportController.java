@@ -23,8 +23,8 @@ public class BugReportController {
 	private BugReportService bugReportService;
 	
 	@GetMapping(path="/pending", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<BugReport> getAllBugReports() {
-		return this.bugReportService.findAllBugReports();
+	public List<BugReport> getAllPendingBugReports() {
+		return this.bugReportService.findByStatus("pending");
 	}
 	
 	@PostMapping(path="/approvedeny", consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -50,9 +50,9 @@ public class BugReportServiceTest {
 	@Test
 	public void testGetAll() {
 
-		Mockito.when(this.bugReportRepository.findAll()).thenReturn(pendingBugReports);
+		Mockito.when(this.bugReportRepository.findAllByStatus("pending")).thenReturn(pendingBugReports);
 		
-		Assert.assertEquals(pendingBugReports, this.bugReportService.findAllBugReports());
+		Assert.assertEquals(pendingBugReports, this.bugReportService.findByStatus("pending"));
 				
 	}
 }
