@@ -1,6 +1,8 @@
 package com.revature.service;
 
-import java.sql.Date;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.junit.jupiter.api.Assertions;
 import org.mockito.InjectMocks;
@@ -33,11 +35,21 @@ public class SumOfReport {
 	public void setUp() {
 		role1 = new Role(1, "user");
 		u1 = new User(1, "user", "password", 100, role1);
+		Calendar calendar = Calendar.getInstance(); 
+		Date localDate = subtractDays(calendar.getTime(), 15);
 		// Severity Med (15) + Time (5) = 20
-		r1 = new BugReport(1, u1, u1, "testproject","location", "this is a test", "steps 1 2 3", "med", new Date(2019,3,4), "complete");
+		r1 = new BugReport(1, u1, u1, "testproject","location", "this is a test", "steps 1 2 3", "med", localDate, "complete");
 		
 		
 		MockitoAnnotations.initMocks(this);
+	}
+	
+	public static Date subtractDays(Date date, int days) {
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTime(date);
+		cal.add(Calendar.DATE, -days);
+				
+		return cal.getTime();
 	}
 	
 	@Test
@@ -45,7 +57,8 @@ public class SumOfReport {
 		
 		Mockito.when(bugReportRepository.findById(1)).thenReturn(r1);
 		
+		System.out.println(r1.getDate());
 		//Sum = Severity + time
-		Assertions.assertEquals(20, this.bugReportService.sumBugReport(1));
+		Assertions.assertEquals(30, this.bugReportService.sumBugReport(1));
 	}
 }
