@@ -7,6 +7,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,8 +33,13 @@ public class BugReportService {
 		return this.bugReportRepository.findById(id);
 	}
 	
-	public void saveBugReport(BugReport bugReport) {
-		this.bugReportRepository.save(bugReport);
+	public boolean saveBugReport(BugReport bugReport) {
+		// checks if bugReport is a null value before trying to save it
+		Optional<BugReport> bug = Optional.ofNullable(bugReport);
+		if( bug.isPresent()) {
+			this.bugReportRepository.save(bugReport);
+			return true;
+		} else return false;
 	}
 	
 	public void deleteBugReport(int id) {

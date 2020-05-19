@@ -5,3 +5,4 @@ public class LoginRepositoryTest {
 	//Interface no tests
 
 }
+
