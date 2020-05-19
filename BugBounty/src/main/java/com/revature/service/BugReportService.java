@@ -78,7 +78,7 @@ public class BugReportService {
 		int sum = this.sumBugReport(id);
 		int currentpoints = resolver.getPoints();
 		resolver.setPoints(currentpoints + sum);
-
+	}
 	public int calculateTimePoints(BugReport bugReportToCheck) {
 		Calendar calendar = Calendar.getInstance();
 		java.util.Date localDate = calendar.getTime();
