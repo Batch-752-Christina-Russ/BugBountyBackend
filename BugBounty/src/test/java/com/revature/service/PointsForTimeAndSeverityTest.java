@@ -72,10 +72,10 @@ public class PointsForTimeAndSeverityTest {
 		assertEquals(15, this.bugReportService.calculateTimePoints(bugForTest));
 	}
 
-//	@Test
-//	public void TestPointsForSeverity() {
-//		assertEquals(5, this.bugReportService.calculateSeverityPoints(bugForTest));
-//	}
+	@Test
+	public void TestPointsForSeverity() {
+		assertEquals(5, this.bugReportService.calculateSeverityPoints(bugForTest));
+	}
 	
 	@Test
 	public void TestPointsPersistedCorrectly() {

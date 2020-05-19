@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+
 import org.junit.jupiter.api.Assertions;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -16,7 +17,6 @@ import com.revature.model.BugReport;
 import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.repository.BugReportRepository;
-import com.revature.repository.UserRepository;
 
 //test that sum of 2 reports has correct value
 public class SumOfReport {
@@ -30,7 +30,6 @@ public class SumOfReport {
 	User u1;
 	Role role1;
 	
-	@SuppressWarnings("deprecation")
 	@BeforeSuite
 	public void setUp() {
 		role1 = new Role(1, "user");
@@ -39,8 +38,6 @@ public class SumOfReport {
 		Date localDate = subtractDays(calendar.getTime(), 15);
 		// Severity Med (15) + Time (5) = 20
 		r1 = new BugReport(1, u1, u1, "testproject","location", "this is a test", "steps 1 2 3", "med", localDate, "complete");
-		
-		
 		MockitoAnnotations.initMocks(this);
 	}
 	
@@ -53,12 +50,13 @@ public class SumOfReport {
 	}
 	
 	@Test
-	public void testSumBugReports() {
+	public void SumBugReports() {
 		
 		Mockito.when(bugReportRepository.findById(1)).thenReturn(r1);
 		
 		System.out.println(r1.getDate());
 		//Sum = Severity + time
 		Assertions.assertEquals(30, this.bugReportService.sumBugReport(1));
+
 	}
 }
