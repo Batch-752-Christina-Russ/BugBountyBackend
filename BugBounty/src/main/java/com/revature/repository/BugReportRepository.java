@@ -14,4 +14,6 @@ public interface BugReportRepository extends JpaRepository<BugReport, Integer>{
 	BugReport findById(int id);
 	//<S extends BugReport> S save (BugReport bugReport);
 	void deleteById(int id);
+	
+	Integer sumBugReport(int id);
 }

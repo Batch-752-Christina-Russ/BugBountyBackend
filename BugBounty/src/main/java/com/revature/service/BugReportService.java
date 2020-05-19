@@ -33,6 +33,7 @@ public class BugReportService {
 	public void deleteBugReport(int id) {
 		this.bugReportRepository.deleteById(id);
 	}
+
 	
 	public int calculateTimePoints(BugReport bugReportToCheck) {
 		Calendar.Builder calendarBuilder = new Calendar.Builder();
@@ -41,5 +42,10 @@ public class BugReportService {
 		long daysBetween = ChronoUnit.DAYS.between(bugReportToCheck.getDate().toInstant(), localDate.toInstant());
 		System.out.println(daysBetween);
 		return (int) daysBetween;
+	}
+
+	public Integer sumBugReport(int id) {
+		BugReport br = this.bugReportRepository.findById(id);
+		return this.bugReportService.calculateTimePoints(br) + this.bugReportService.calculateSeverityPoints(br);
 	}
 }
