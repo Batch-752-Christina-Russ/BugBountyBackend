@@ -29,4 +29,9 @@ public class BugReportService {
 	public void deleteBugReport(int id) {
 		this.bugReportRepository.deleteById(id);
 	}
+
+	public Integer sumBugReport(int id) {
+		BugReport br = this.bugReportRepository.findById(id);
+		return this.bugReportService.calculateTimePoints(br) + this.bugReportService.calculateSeverityPoints(br);
+	}
 }
