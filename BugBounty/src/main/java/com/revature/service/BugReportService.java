@@ -1,5 +1,9 @@
 package com.revature.service;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +38,7 @@ public class BugReportService {
 		this.bugReportRepository.deleteById(id);
 	}
 	
+
 	public void resolve(int id, String username) {
 		//get bug report to update
 		BugReport report = this.findById(id);
@@ -52,5 +57,14 @@ public class BugReportService {
 		int sum = this.sumBugReport(id);
 		int currentpoints = resolver.getPoints();
 		resolver.setPoints(currentpoints + sum);
+
+	public int calculateTimePoints(BugReport bugReportToCheck) {
+		Calendar.Builder calendarBuilder = new Calendar.Builder();
+		Calendar calendar = calendarBuilder.build();
+		Date localDate = calendar.getTime();
+		long daysBetween = ChronoUnit.DAYS.between(bugReportToCheck.getDate().toInstant(), localDate.toInstant());
+		System.out.println(daysBetween);
+		return (int) daysBetween;
+
 	}
 }
