@@ -1,6 +1,8 @@
 package com.revature.service;
 
+
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,7 +39,9 @@ public class BugReportService {
 
 	public Integer sumBugReport(int id) {
 		BugReport br = this.bugReportRepository.findById(id);
+		System.out.println(br);
 		return this.calculateTimePoints(br) + this.calculateSeverityPoints(br);
+		
 	}
 
 	private int calculateSeverityPoints(BugReport br) {
@@ -51,13 +55,11 @@ public class BugReportService {
 		}
 	}
 	
-
-	
 	public int calculateTimePoints(BugReport bugReportToCheck) {
-		Calendar.Builder calendarBuilder = new Calendar.Builder();
-		Calendar calendar = calendarBuilder.build();
-		Date localDate = calendar.getTime();
-		long daysBetween = ChronoUnit.DAYS.between(bugReportToCheck.getDate().toInstant(), localDate.toInstant());
+		Calendar calendar = Calendar.getInstance();
+		java.util.Date localDate = calendar.getTime();
+		Date stupidDate = bugReportToCheck.getDate();
+		long daysBetween = ChronoUnit.DAYS.between( stupidDate.toInstant(), localDate.toInstant());
 		System.out.println(daysBetween);
 		return (int) daysBetween;
 
