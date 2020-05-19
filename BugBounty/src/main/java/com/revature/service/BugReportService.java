@@ -29,4 +29,8 @@ public class BugReportService {
 	public void deleteBugReport(int id) {
 		this.bugReportRepository.deleteById(id);
 	}
+	
+	public List<BugReport> findByStatus(String status){
+		return this.bugReportRepository.findAllByStatus(status);
+	}
 }
