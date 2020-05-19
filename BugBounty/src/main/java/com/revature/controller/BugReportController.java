@@ -46,5 +46,10 @@ public class BugReportController {
 	public void deleteBugReport(@PathVariable int id) {
 		this.bugReportService.deleteBugReport(id);
 	}
+  
+	@PostMapping("/resolve/{id}/{username}")
+	public void resolution(@PathVariable int id, @PathVariable String username) {
+		this.bugReportService.resolve(id, username);
+	}
 
 }

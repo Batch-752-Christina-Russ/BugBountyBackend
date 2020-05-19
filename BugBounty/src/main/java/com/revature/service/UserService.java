@@ -21,5 +21,17 @@ public class UserService {
 	public void saveUser(User user) {
 		this.userRepository.save(user);
 	}
+
+	public List<User> getTopTen() {
+		return this.userRepository.findFirst10ByOrderByPointsDesc();
+	}
 	
+	public User login(String username, String password) {
+		return this.userRepository.findByUsernameAndPassword(username, password);
+	}
+
+	public Object getRankAndUser(String username) {
+	return this.userRepository.getRankByUserNameOrderByPoints(username);
+}
+
 }
