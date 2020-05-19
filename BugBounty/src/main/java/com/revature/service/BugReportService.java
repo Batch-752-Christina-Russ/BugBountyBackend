@@ -47,7 +47,7 @@ public class BugReportService {
 		
 	}
 
-	private int calculateSeverityPoints(BugReport br) {
+	public int calculateSeverityPoints(BugReport br) {
 		//   returns static values for Severity static values for severity low - 5, med - 15, high - 25, critical - 50
 		switch(br.getSeverity()){
 		case "low": return 5;
