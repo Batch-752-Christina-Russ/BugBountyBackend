@@ -32,12 +32,9 @@ import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.service.BugReportService;
 
-//@WebMvcTest(BugReportController.class)
 @WebAppConfiguration
 @SpringBootTest
 public class BugReportControllerTest {
-	@Autowired
-	private RestTemplate restTemplate;
 
 	@Mock
 	private BugReportService bugReportService;

@@ -24,7 +24,6 @@ public class BugReportController {
 	
 	@GetMapping(path="/pending", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<BugReport> getAllBugReports() {
-		System.out.println("hello world");
 		return this.bugReportService.findAllBugReports();
 	}
 	
