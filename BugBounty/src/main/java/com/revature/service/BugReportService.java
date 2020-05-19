@@ -24,8 +24,10 @@ public class BugReportService {
 	}
 	
 	public boolean saveBugReport(BugReport bugReport) {
-		Optional<BugReport> bug = Optional.ofNullable(this.bugReportRepository.save(bugReport));
+		// checks if bugReport is a null value before trying to save it
+		Optional<BugReport> bug = Optional.ofNullable(bugReport);
 		if( bug.isPresent()) {
+			this.bugReportRepository.save(bugReport);
 			return true;
 		} else return false;
 	}

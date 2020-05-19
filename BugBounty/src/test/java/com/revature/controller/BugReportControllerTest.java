@@ -5,10 +5,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.sql.Date;
+import java.util.Date;
 
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -17,7 +15,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.BugBountyApplication;
 import com.revature.model.BugReport;
 import com.revature.model.Role;
@@ -38,7 +39,7 @@ public class BugReportControllerTest {
 	
 	private BugReport bugReport;
 	
-	@Before
+	@BeforeClass
 	public void setUp() {
 		
 		//Don't forget to initialize those Mockito annotations!
@@ -50,13 +51,13 @@ public class BugReportControllerTest {
 		//Initialize some mock data:
 		
 		int id = 1;
-		Role adminRole = new Role(0, "ADMIN");
-		Role userRole = new Role(1, "USER");
+		Role adminRole = new Role(2, "admin");
+		Role userRole = new Role(1, "user");
 		User firstUser = new User(1, "darthvader", "lightsaber", 0, adminRole);
 		User secondUser = new User(2, "billcipher", "triangle", 0, userRole);
 		bugReport = new BugReport(id, firstUser, secondUser, "BugBounty", "somewhere",
 				"hitting any key causes machine to explode.", "open app and hit any key", "LOW",
-				new Date(System.currentTimeMillis()), "SUBMITTED");
+				new Date(), "pending");
 	}
 	
 //	@Test
@@ -85,16 +86,18 @@ public class BugReportControllerTest {
 	@Test
 	public void testSaveBugReport() {
 	
-		
 	    Mockito.when(this.bugReportService.saveBugReport(bugReport)).thenReturn(true);
 	    try {
-			mockmvc.perform(post("/bugreport/new")).andExpect(status().isOk())
+			ObjectMapper om = new ObjectMapper();
+			String bugReportJson = om.writeValueAsString(bugReport);
+			mockmvc.perform(post("/bugreport/save").contentType(MediaType.APPLICATION_JSON_VALUE).content(bugReportJson))
+			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 			.andDo(print()).andReturn();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	    
-		}
-		   
 	}
+		   
+}
