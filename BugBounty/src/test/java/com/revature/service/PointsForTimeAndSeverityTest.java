@@ -61,13 +61,11 @@ public class PointsForTimeAndSeverityTest {
 	
 	@Test
 	public void TestPointsForTime() {
-		Mockito.when(bugReportRepository.getTimeSinceBug(bugId)).thenReturn(LocalDateTime.now().minusDays(10));
 		assertEquals(10, this.bugReportService.calculateTimePoints(bugForTest));
 	}
 
 	@Test
 	public void TestPointsForSeverity() {
-		Mockito.when(bugReportRepository.getBugSeverity(bugId)).thenReturn("low");
 		assertEquals(5, this.bugReportService.calculateSeverityPoints(bugForTest));
 	}
 	
