@@ -53,8 +53,7 @@ public class SumOfReport {
 	public void SumBugReports() {
 		
 		Mockito.when(bugReportRepository.findById(1)).thenReturn(r1);
-		
-		System.out.println(r1.getDate());
+
 		//Sum = Severity + time
 		Assertions.assertEquals(30, this.bugReportService.sumBugReport(1));
 

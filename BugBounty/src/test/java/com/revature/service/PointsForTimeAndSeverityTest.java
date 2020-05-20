@@ -1,17 +1,7 @@
 package com.revature.service;
 
-import org.testng.annotations.Test;
-
-import com.revature.model.BugReport;
-import com.revature.model.Role;
-import com.revature.model.User;
-import com.revature.repository.BugReportRepository;
-import com.revature.repository.UserRepository;
-
 import static org.testng.Assert.assertEquals;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -21,6 +11,13 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import com.revature.model.BugReport;
+import com.revature.model.Role;
+import com.revature.model.User;
+import com.revature.repository.BugReportRepository;
+import com.revature.repository.UserRepository;
 
 public class PointsForTimeAndSeverityTest {
 
@@ -75,16 +72,6 @@ public class PointsForTimeAndSeverityTest {
 	@Test
 	public void TestPointsForSeverity() {
 		assertEquals(5, this.bugReportService.calculateSeverityPoints(bugForTest));
-	}
-	
-	@Test
-	public void TestPointsPersistedCorrectly() {
-
-		Mockito.when(userRepository.UpdatePoints(userForTest.getId()).someMethod());
-		
-		assertEquals(50, userForTest.getPoints());
-		this.userService.addPointsToUser(userForTest, 50);
-		assertEquals(100, this.userService.addPointsToUser(userForTest).getPoints());
 	}
 
 }
