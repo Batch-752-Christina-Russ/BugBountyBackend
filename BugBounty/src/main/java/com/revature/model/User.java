@@ -32,11 +32,6 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name="role_id")
 	private Role role;
-	//Possible future use if client desires to show this data on the user's homepage
-//	@OneToMany(fetch=FetchType.LAZY, mappedBy="reporter")
-//	private List<BugReport> reported;
-//	@OneToMany(fetch=FetchType.LAZY, mappedBy="resolver")
-//	private List<BugReport> resolved;
 	
 	public int getId() {
 		return id;
