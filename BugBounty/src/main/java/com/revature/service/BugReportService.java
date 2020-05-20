@@ -43,7 +43,7 @@ public class BugReportService {
 		this.bugReportRepository.deleteById(id);
 	}
 
-	public Integer sumBugReport(int id) {
+	public int sumBugReport(int id) {
 		BugReport br = this.bugReportRepository.findById(id);
 		return this.calculateTimePoints(br) + this.calculateSeverityPoints(br);
 		
