@@ -37,7 +37,7 @@ public class BugReportServiceStatusTest {
 		User secondUser = new User(2, "billcipher", "triangle", 0, userRole);
 		bugReport = new BugReport(id, firstUser, secondUser, "BugBounty", "somewhere",
 				"hitting any key causes machine to explode.", "open app and hit any key", "LOW",
-				new Date(), "pending");
+				new Date(), "open");
 		
 		bugReportService = new BugReportService();
 		
@@ -45,14 +45,16 @@ public class BugReportServiceStatusTest {
 	}
 	
 	@Test
-	public void testLogin() {
+	public void testGetBugReportByStatus() {
 		
 		List<BugReport> bg = new ArrayList<>();
 		bg.add(bugReport);
 		
-		Mockito.when(bugReportRepository.findAllByStatus("pending")).thenReturn(bg);
+		Mockito.when(bugReportRepository.findAllByStatus("open")).thenReturn(bg);
 		
 		//Assert that user is returned
-		Assertions.assertEquals("somewhere", this.bugReportService.findByStatus("pending").get(0).getLocation());
+		Assertions.assertEquals("somewhere", this.bugReportService.findByStatus("open").get(0).getLocation());
+		Assertions.assertNull(this.bugReportService.findByStatus("open").get(0).getReporter().getPassword());
+		Assertions.assertNull(this.bugReportService.findByStatus("open").get(0).getResolver().getPassword());
 	}
 }

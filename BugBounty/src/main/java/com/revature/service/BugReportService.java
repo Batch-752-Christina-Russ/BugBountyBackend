@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.model.BugReport;
+import com.revature.model.User;
 import com.revature.repository.BugReportRepository;
 
 @Service("bugReportService")
@@ -31,6 +32,15 @@ public class BugReportService {
 	}
 	
 	public List<BugReport> findByStatus(String status){
-		return this.bugReportRepository.findAllByStatus(status);
+		List<BugReport> bugreports = this.bugReportRepository.findAllByStatus(status);
+		for(BugReport b : bugreports) {
+			User reporter = b.getReporter();
+			reporter.setPassword(null);
+			User resolver = b.getResolver();
+			resolver.setPassword(null);
+			b.setReporter(reporter);
+			b.setResolver(resolver);
+		}
+		return bugreports;
 	}
 }
