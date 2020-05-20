@@ -30,6 +30,14 @@ public class UserService {
 		return this.userRepository.findByUsernameAndPassword(username, password);
 	}
 
+	/**
+	* Returns an object that contains the user's rank in the leader board, name, and points. 
+	* <p>
+	* This method is the called by the end point for getting a single user's rank in the leader board.
+	*
+	* @param  name of the user that the requester want the rank of.
+	* @return      Returns an object that contains a user's rank in the leader board, name, and points. 
+	*/
 	public Object getRankAndUser(String username) {
 	return this.userRepository.getRankByUserNameOrderByPoints(username);
 }

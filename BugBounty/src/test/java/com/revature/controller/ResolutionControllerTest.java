@@ -52,7 +52,7 @@ public class ResolutionControllerTest {
 	public void ResolutionControllerTest() {
 		
 		try {
-			mockMvc.perform(post("/bugreport/resolve/")).andExpect(status().isOk())
+			mockMvc.perform(post("/bugreport/resolve/")).andExpect(status().isOk()) //needs the /{id}/{username}
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 			.andDo(print());
 
