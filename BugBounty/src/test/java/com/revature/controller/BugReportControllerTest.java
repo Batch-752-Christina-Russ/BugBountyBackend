@@ -60,28 +60,6 @@ public class BugReportControllerTest {
 				new Date(), "pending");
 	}
 	
-//	@Test
-//public void testGetAllBugReports() {
-//		
-//		Mockito.when(this.bugReportService.findAllBugReports()).thenReturn(bugReportList);
-//		
-//		//Now let's make a request to our mock controller.
-//		try {
-//			mockmvc.perform(get("/all")).andExpect(status().isOk())
-//			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-//			.andDo(print()).andReturn();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-	
-//	@Test
-//	public void testFindById() {
-//		int id = 1;
-//		Mockito.when(this.bugReportService.findById(id )).thenReturn(bugReport);
-//		
-//		
-//	}
 	
 	@Test
 	public void testSaveBugReport() {
