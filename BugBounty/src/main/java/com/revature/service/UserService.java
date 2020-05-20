@@ -23,7 +23,14 @@ public class UserService {
 	}
 
 	public List<User> getTopTen() {
-		return this.userRepository.findFirst10ByOrderByPointsDesc();
+		List<User> topTen =  this.userRepository.findFirst10ByOrderByPointsDesc();
+		
+		//nullify passwords
+		for(User u : topTen) {
+			u.setPassword(null);
+		}
+		
+		return topTen;
 	}
 	
 	public User login(String username, String password) {
