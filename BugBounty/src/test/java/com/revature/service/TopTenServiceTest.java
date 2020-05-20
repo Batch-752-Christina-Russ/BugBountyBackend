@@ -16,7 +16,19 @@ import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.repository.UserRepository;
 
-
+/**
+ * <h1> TopTen ServiceTest</h1>
+* This is a test for the method getTopTen() in UserService..
+* 
+* This class mocks a User array list and tests the getTopTen method to ensure it returns only ten users, and they are ordered according
+* to point value
+* 
+* 
+* @author Colin Baldwin
+* @author Jacob Short
+* @version 1.0
+* 
+*/
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -47,7 +59,6 @@ public class TopTenServiceTest {
 	    top10.add(new User(8, "Jill", "password", 20, role));
 	    top10.add(new User(9, "TooManyUsers", "password", 10, role));
 	    top10.add(new User(10, "Finally", "password", 0, role));
-		
 		//initialize Mockito
 		MockitoAnnotations.initMocks(this);
 	}
@@ -56,7 +67,6 @@ public class TopTenServiceTest {
 	public void testGetTopTen() {
 		//TDD, methods do not yet exist
 		Mockito.when(this.userRepository.findFirst10ByOrderByPointsDesc()).thenReturn(top10);
-		
 		//return a list of Users
 		Assert.assertEquals(top10, this.userService.getTopTen());
 		

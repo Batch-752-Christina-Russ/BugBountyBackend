@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -18,6 +19,7 @@ import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.repository.BugReportRepository;
 import com.revature.repository.UserRepository;
+
 
 public class PointsForTimeAndSeverityTest {
 
