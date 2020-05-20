@@ -59,7 +59,15 @@ public class UserController {
 		return u;
 	}
 
-
+	
+	/**
+	* Returns a Json object that contains the user's rank in the leader board, name, and points. 
+	* <p>
+	* This method is the end point for getting a single user's rank in the leader board.
+	*
+	* @param  name of the user that the requester wants the rank of.
+	* @return      a Response Entity with a json body that contains a user's rank in the leader board, name, and points. 
+	*/
 
 	@GetMapping(path="/userrank/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> getRankAndUser(@PathVariable String username) {

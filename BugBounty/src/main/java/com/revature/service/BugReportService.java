@@ -43,7 +43,7 @@ public class BugReportService {
 		this.bugReportRepository.deleteById(id);
 	}
 
-	public Integer sumBugReport(int id) {
+	public int sumBugReport(int id) {
 		BugReport br = this.bugReportRepository.findById(id);
 		return this.calculateTimePoints(br) + this.calculateSeverityPoints(br);
 		
@@ -81,6 +81,16 @@ public class BugReportService {
 		resolver.setPoints(currentpoints + sum);
 	}
 
+	/**
+	* Returns an int equaling the time bonus points of a resolved bug, one point per day since submission. 
+	* <p>
+	* This method gets a Calendar object to find out the current day, finds out the number of days 
+	* that have passed between the bugs submission date and the current day. Then cast that as 
+	* an int which represents the number of points to return. Right now one point is rewarded per day.
+	*
+	* @param  a bug report that has just been resolved. It will use it's submit date.
+	* @return      an int equaling the point value of a resolved bug time bonus.
+	*/
 	public int calculateTimePoints(BugReport bugReportToCheck) {
 		Calendar calendar = Calendar.getInstance(); 
 		Date localDate = calendar.getTime();

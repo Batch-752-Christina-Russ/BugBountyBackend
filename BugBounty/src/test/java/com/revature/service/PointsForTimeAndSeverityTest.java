@@ -37,10 +37,10 @@ public class PointsForTimeAndSeverityTest {
 	
 	Role role = new Role(2, "Admin");
 	User userForTest = new User(10, "username", "password", 50, role);
-	int bugId = 5;
+	public int bugId = 5;
 	Calendar calendar = Calendar.getInstance(); 
 	Date localDate = subtractDays(calendar.getTime(), 15);
-	BugReport bugForTest = 
+	public BugReport bugForTest = 
 	new BugReport(bugId, userForTest, userForTest, "application", "location", "description", "steps", "low", localDate, "status");
 			   
 	@BeforeClass
