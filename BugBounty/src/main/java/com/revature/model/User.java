@@ -32,10 +32,6 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name="role_id")
 	private Role role;
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="reporter")
-	private List<BugReport> reported;
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="resolver")
-	private List<BugReport> resolved;
 	
 	public int getId() {
 		return id;
@@ -109,11 +105,15 @@ public class User {
 		return true;
 	}
 	
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", points=" + points + ", role="
-				+ role + ", reported=" + reported + ", resolved=" + resolved + "]";
+				+ role + "]";
 	}
+
+
+
 	public User(int id, String username, String password, int points, Role role) {
 		super();
 		this.id = id;

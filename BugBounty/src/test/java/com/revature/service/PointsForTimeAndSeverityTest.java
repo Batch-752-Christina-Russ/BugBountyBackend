@@ -39,9 +39,8 @@ public class PointsForTimeAndSeverityTest {
 	Role role = new Role(2, "Admin");
 	User userForTest = new User(10, "username", "password", 50, role);
 	int bugId = 5;
-	Calendar.Builder calendarBuilder = new Calendar.Builder();
-	Calendar calendar = calendarBuilder.build();
-	Date localDate = subtractDays(calendar.getTime(), 10);
+	Calendar calendar = Calendar.getInstance(); 
+	Date localDate = subtractDays(calendar.getTime(), 15);
 	BugReport bugForTest = 
 	new BugReport(bugId, userForTest, userForTest, "application", "location", "description", "steps", "low", localDate, "status");
 			   
@@ -70,7 +69,7 @@ public class PointsForTimeAndSeverityTest {
 	
 	@Test
 	public void TestPointsForTime() {
-		assertEquals(10, this.bugReportService.calculateTimePoints(bugForTest));
+		assertEquals(15, this.bugReportService.calculateTimePoints(bugForTest));
 	}
 
 	@Test
