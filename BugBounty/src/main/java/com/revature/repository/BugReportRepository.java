@@ -24,4 +24,5 @@ public interface BugReportRepository extends JpaRepository<BugReport, Integer>{
 	@Modifying
 	@Query("UPDATE BugReport SET status=:status WHERE id=:id")
 	int updateStatus(@Param("id") int id, @Param("status") String status);
+	
 }

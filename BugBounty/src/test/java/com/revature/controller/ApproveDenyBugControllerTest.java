@@ -34,7 +34,7 @@ import com.revature.service.BugReportService;
 
 @WebAppConfiguration
 @SpringBootTest
-public class BugReportControllerTest {
+public class ApproveDenyBugControllerTest {
 
 	@Mock
 	private BugReportService bugReportService;
@@ -74,10 +74,10 @@ public class BugReportControllerTest {
 	}
 	
 	@Test
-	public void testApproveDeny() {
+	public void testApproveDenyOpen() {
 		try {
 			mockMvc.perform(post("/bugreport/approvedeny")
-			.content(asJsonString(new BugReport(3, user , "sadfasdfasd", "error file", "bad code","4", "high", new Date(), "approved")))
+			.content(asJsonString(new BugReport(3, user , "sadfasdfasd", "error file", "bad code","4", "high", new Date(), "open")))
 			.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 			.andDo(print()).andReturn();
 		}
@@ -86,6 +86,21 @@ public class BugReportControllerTest {
 		}
 
 	}
+	
+	@Test
+	public void testApproveDenyDelete() {
+		try {
+			mockMvc.perform(post("/bugreport/approvedeny")
+			.content(asJsonString(new BugReport(3, user , "sadfasdfasd", "error file", "bad code","4", "high", new Date(), "delete")))
+			.contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+			.andDo(print()).andReturn();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+
+	}
+	
 	public static String asJsonString(final Object obj) {
 	    try {
 	        final ObjectMapper mapper = new ObjectMapper();

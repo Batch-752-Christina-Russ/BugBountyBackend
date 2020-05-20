@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PostLoad;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -214,14 +213,5 @@ public class BugReport {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	@PostLoad
-    public void deleteSensitiveData() {
-       this.reporter.setPassword(null);
-       
-       if(this.resolver != null) {
-    	   this.resolver.setPassword(null);
-       }
-	}
-	
+		
 }

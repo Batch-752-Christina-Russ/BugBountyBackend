@@ -24,7 +24,15 @@ public class BugReportController {
 	
 	@GetMapping(path="/pending", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<BugReport> getAllPendingBugReports() {
-		return this.bugReportService.findByStatus("pending");
+		
+		List<BugReport> reports = this.bugReportService.findByStatus("pending");
+		
+		//Make sure that all reports password is null to the client side!
+		for(BugReport b : reports) {
+			b.getReporter().setPassword(null);
+		}
+
+		return reports;
 	}
 	
 	@PostMapping(path="/approvedeny", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -36,4 +44,5 @@ public class BugReportController {
 			this.bugReportService.deleteBugReport(bugReport.getId());
 		}
 	}
+	
 }
