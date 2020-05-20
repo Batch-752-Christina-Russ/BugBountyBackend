@@ -51,8 +51,7 @@ public class BugReportService {
 	public List<BugReport> findByStatus(String status){
 		return this.bugReportRepository.findAllByStatus(status);
 	}
-
-	public Integer sumBugReport(int id) {
+	public int sumBugReport(int id) {
 		BugReport br = this.bugReportRepository.findById(id);
 		return this.calculateTimePoints(br) + this.calculateSeverityPoints(br);
 		
