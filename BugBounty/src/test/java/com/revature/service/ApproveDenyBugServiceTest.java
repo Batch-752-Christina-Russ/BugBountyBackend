@@ -1,5 +1,7 @@
 package com.revature.service;
 
+import static org.mockito.Mockito.atLeastOnce;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,16 +38,14 @@ public class ApproveDenyBugServiceTest {
 	
 	@Test
 	public void testUpdateBugReportStatus() {
-		//Mockito.doNothing().when(bugReportRepository).updateStatus(8, "open");
-		//Mockito does nothing the first time for free
+
+		Mockito.verify(bugReportRepository, atLeastOnce()).updateStatus(8, "open");
 		bugReportService.updateBugReportStatus(bugReport);
 	}
 	
 	@Test
-	public void testDeleteBugReport() {
-		//Mock deleteBugById(id) when called 
-		Mockito.doNothing().when(bugReportRepository).deleteById(8);
-		
+	public void testDeleteBugReport() {		
+		Mockito.verify(bugReportRepository, atLeastOnce()).deleteById(8);
 		bugReportService.deleteBugReport(8);
 	}
 
