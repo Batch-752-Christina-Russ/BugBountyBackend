@@ -1,16 +1,12 @@
 package com.revature.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -32,10 +28,6 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name="role_id")
 	private Role role;
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="reporter")
-	private List<BugReport> reported;
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="resolver")
-	private List<BugReport> resolved;
 	
 	public int getId() {
 		return id;
@@ -109,11 +101,15 @@ public class User {
 		return true;
 	}
 	
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", points=" + points + ", role="
-				+ role + ", reported=" + reported + ", resolved=" + resolved + "]";
+				+ role + "]";
 	}
+
+
+
 	public User(int id, String username, String password, int points, Role role) {
 		super();
 		this.id = id;

@@ -1,5 +1,6 @@
 package com.revature.service;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,12 +12,13 @@ import org.mockito.MockitoAnnotations;
 import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+
 
 import com.revature.model.BugReport;
 import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.repository.BugReportRepository;
-
 
 
 public class BugReportServiceTest {
@@ -30,6 +32,7 @@ public class BugReportServiceTest {
 	//global variables
 	private User user = new User(6, "Bob", "password", 40, new Role(1, "user"));
 	private List<BugReport> pendingBugReports =  new ArrayList<>();
+  BugReport bugReport;
 	
 	@BeforeSuite
 	public void setup() {
@@ -46,6 +49,19 @@ public class BugReportServiceTest {
 		//initialize Mockito
 		MockitoAnnotations.initMocks(this);
 	}
+  
+  @BeforeClass
+	public void beforeClass() {
+		Role adminRole = new Role(2, "admin");
+		Role userRole = new Role(1, "user");
+		User firstUser = new User(1, "darthvader", "lightsaber", 0, adminRole);
+		User secondUser = new User(2, "billcipher", "triangle", 0, userRole);
+		bugReport = new BugReport(1, firstUser, secondUser, "BugBounty", "somewhere",
+				"hitting any key causes machine to explode.", "open app and hit any key", "LOW", new Date(), "pending");
+		bugReportService = new BugReportService();
+		MockitoAnnotations.initMocks(this);
+	}
+
 	
 	@Test
 	public void testGetAll() {
