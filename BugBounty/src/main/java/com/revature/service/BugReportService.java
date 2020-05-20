@@ -39,10 +39,18 @@ public class BugReportService {
 		} else return false;
 	}
 	
+	public void updateBugReportStatus(BugReport bugReport) {
+		//this.bugReportRepository.save(bugReport);
+		this.bugReportRepository.updateStatus(bugReport.getId(), bugReport.getStatus());
+	}
+	
 	public void deleteBugReport(int id) {
 		this.bugReportRepository.deleteById(id);
 	}
 
+	public List<BugReport> findByStatus(String status){
+		return this.bugReportRepository.findAllByStatus(status);
+	}
 	public int sumBugReport(int id) {
 		BugReport br = this.bugReportRepository.findById(id);
 		return this.calculateTimePoints(br) + this.calculateSeverityPoints(br);
