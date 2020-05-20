@@ -29,5 +29,9 @@ public class UserService {
 	public User login(String username, String password) {
 		return this.userRepository.findByUsernameAndPassword(username, password);
 	}
-	
+
+	public Object getRankAndUser(String username) {
+	return this.userRepository.getRankByUserNameOrderByPoints(username);
+}
+
 }
