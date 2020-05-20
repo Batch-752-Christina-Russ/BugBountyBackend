@@ -29,9 +29,10 @@ public class BugReportController {
 	
 	@PostMapping(path="/approvedeny", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void saveUser(@RequestBody BugReport bugReport) {
-		if(bugReport.getStatus().contentEquals("approved")) {
-			this.bugReportService.saveBugReport(bugReport);
-		} else if(bugReport.getStatus().contentEquals("denied")){
+				
+		if(bugReport.getStatus().contentEquals("open")) {
+			this.bugReportService.updateBugReportStatus(bugReport);
+		} else if(bugReport.getStatus().contentEquals("delete")){
 			this.bugReportService.deleteBugReport(bugReport.getId());
 		}
 	}

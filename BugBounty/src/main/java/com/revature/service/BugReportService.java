@@ -26,6 +26,11 @@ public class BugReportService {
 		this.bugReportRepository.save(bugReport);
 	}
 	
+	public void updateBugReportStatus(BugReport bugReport) {
+		//this.bugReportRepository.save(bugReport);
+		this.bugReportRepository.updateStatus(bugReport.getId(), bugReport.getStatus());
+	}
+	
 	public void deleteBugReport(int id) {
 		this.bugReportRepository.deleteById(id);
 	}
