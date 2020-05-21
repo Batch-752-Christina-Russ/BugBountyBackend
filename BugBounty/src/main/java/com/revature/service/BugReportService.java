@@ -61,9 +61,15 @@ public class BugReportService {
 	}
 	
 
-	public void resolve(int id, String username) {
+	public boolean resolve(int id, String username) {
+		//boolean to check status
+		boolean worked = false;
+		
 		//get bug report to update
 		BugReport report = this.findById(id);
+		if(report == null) {
+			return worked;
+		}
 		
 		//get resolver's user object
 		User resolver = this.userRepository.findByUsername(username);
@@ -73,12 +79,17 @@ public class BugReportService {
 		report.setResolver(resolver);
 		
 		//update record in database
-		this.saveBugReport(report);
+		worked = this.saveBugReport(report);
 		
-		//update resolver's points
-		int sum = this.sumBugReport(id);
-		int currentpoints = resolver.getPoints();
-		resolver.setPoints(currentpoints + sum);
+		if(worked) {
+			//update resolver's points
+			int sum = this.sumBugReport(id);
+			int currentpoints = resolver.getPoints();
+			resolver.setPoints(currentpoints + sum);
+			this.userRepository.save(resolver);
+		}
+		
+		return worked;
 	}
 
 	public int calculateTimePoints(BugReport bugReportToCheck) {
