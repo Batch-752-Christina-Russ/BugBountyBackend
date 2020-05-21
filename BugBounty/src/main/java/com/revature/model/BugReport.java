@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -197,11 +196,22 @@ public class BugReport {
 		this.date = date;
 		this.status = status;
 	}
+	public BugReport(int id, User reporter, String application, String location, String description,
+			String steps, String severity, Date date, String status) {
+		super();
+		this.id = id;
+		this.reporter = reporter;
+		this.application = application;
+		this.location = location;
+		this.description = description;
+		this.steps = steps;
+		this.severity = severity;
+		this.date = date;
+		this.status = status;
+	}
 	public BugReport() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
+		
 }

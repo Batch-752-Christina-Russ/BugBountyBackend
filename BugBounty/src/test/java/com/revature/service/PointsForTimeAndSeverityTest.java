@@ -8,9 +8,9 @@ import java.util.GregorianCalendar;
 
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -23,13 +23,13 @@ import com.revature.repository.UserRepository;
 
 public class PointsForTimeAndSeverityTest {
 
-	@MockBean
+	@Mock
 	UserRepository userRepository;
 
 	@InjectMocks
 	UserService userService;
 	
-	@MockBean
+	@Mock
 	BugReportRepository bugReportRepository;
 
 	@InjectMocks

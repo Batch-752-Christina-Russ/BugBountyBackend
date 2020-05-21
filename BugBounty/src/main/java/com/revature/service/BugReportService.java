@@ -22,10 +22,6 @@ public class BugReportService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public List<BugReport> findAllBugReports(){
-		return this.bugReportRepository.findAll();
-	}
-	
 	public BugReport findById(int id) {
 		return this.bugReportRepository.findById(id);
 	}
@@ -37,6 +33,11 @@ public class BugReportService {
 			this.bugReportRepository.save(bugReport);
 			return true;
 		} else return false;
+	}
+	
+	public void updateBugReportStatus(BugReport bugReport) {
+		//this.bugReportRepository.save(bugReport);
+		this.bugReportRepository.updateStatus(bugReport.getId(), bugReport.getStatus());
 	}
 	
 	public void deleteBugReport(int id) {
@@ -61,9 +62,15 @@ public class BugReportService {
 	}
 	
 
-	public void resolve(int id, String username) {
+	public boolean resolve(int id, String username) {
+		//boolean to check status
+		boolean worked = false;
+		
 		//get bug report to update
 		BugReport report = this.findById(id);
+		if(report == null) {
+			return worked;
+		}
 		
 		//get resolver's user object
 		User resolver = this.userRepository.findByUsername(username);
@@ -73,12 +80,17 @@ public class BugReportService {
 		report.setResolver(resolver);
 		
 		//update record in database
-		this.saveBugReport(report);
+		worked = this.saveBugReport(report);
 		
-		//update resolver's points
-		int sum = this.sumBugReport(id);
-		int currentpoints = resolver.getPoints();
-		resolver.setPoints(currentpoints + sum);
+		if(worked) {
+			//update resolver's points
+			int sum = this.sumBugReport(id);
+			int currentpoints = resolver.getPoints();
+			resolver.setPoints(currentpoints + sum);
+			this.userRepository.save(resolver);
+		}
+		
+		return worked;
 	}
 
 	/**
@@ -96,5 +108,25 @@ public class BugReportService {
 		Date localDate = calendar.getTime();
 		long daysBetween = ChronoUnit.DAYS.between(bugReportToCheck.getDate().toInstant(), localDate.toInstant());
 		return (int) daysBetween;
+	}
+	
+	public List<BugReport> findByStatus(String status){
+		List<BugReport> bugreports = this.bugReportRepository.findAllByStatus(status);
+		for(BugReport b : bugreports) {
+			switch(status){
+			case "pending": 
+				b.getReporter().setPassword(null);
+				break;
+			case "open":
+				b.getReporter().setPassword(null);
+				break;
+			case "resolved":
+				b.getReporter().setPassword(null);
+				b.getResolver().setPassword(null);
+				break;
+				default:;
+			}
+		}
+		return bugreports;
 	}
 }

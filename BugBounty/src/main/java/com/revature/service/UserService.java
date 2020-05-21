@@ -31,7 +31,14 @@ public class UserService {
 	* @return List<User> the returned list of users for top ten.
 	*/
 	public List<User> getTopTen() {
-		return this.userRepository.findFirst10ByOrderByPointsDesc();
+		List<User> topTen =  this.userRepository.findFirst10ByOrderByPointsDesc();
+		
+		//nullify passwords
+		for(User u : topTen) {
+			u.setPassword(null);
+		}
+		
+		return topTen;
 	}
 	
 	/**
