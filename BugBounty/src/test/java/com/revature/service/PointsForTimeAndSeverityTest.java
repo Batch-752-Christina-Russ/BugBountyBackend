@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -18,6 +19,7 @@ import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.repository.BugReportRepository;
 import com.revature.repository.UserRepository;
+
 
 public class PointsForTimeAndSeverityTest {
 
@@ -35,10 +37,10 @@ public class PointsForTimeAndSeverityTest {
 	
 	Role role = new Role(2, "Admin");
 	User userForTest = new User(10, "username", "password", 50, role);
-	int bugId = 5;
+	public int bugId = 5;
 	Calendar calendar = Calendar.getInstance(); 
 	Date localDate = subtractDays(calendar.getTime(), 15);
-	BugReport bugForTest = 
+	public BugReport bugForTest = 
 	new BugReport(bugId, userForTest, userForTest, "application", "location", "description", "steps", "low", localDate, "status");
 			   
 	@BeforeClass
