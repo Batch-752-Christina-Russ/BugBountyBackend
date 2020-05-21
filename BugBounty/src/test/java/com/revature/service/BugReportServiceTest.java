@@ -57,18 +57,25 @@ public class BugReportServiceTest {
 		User firstUser = new User(1, "darthvader", "lightsaber", 0, adminRole);
 		User secondUser = new User(2, "billcipher", "triangle", 0, userRole);
 		bugReport = new BugReport(1, firstUser, secondUser, "BugBounty", "somewhere",
-				"hitting any key causes machine to explode.", "open app and hit any key", "LOW", new Date(), "pending");
+				"hitting any key causes machine to explode.", "open app and hit any key", "LOW", new Date(), "open");
 		bugReportService = new BugReportService();
 		MockitoAnnotations.initMocks(this);
 	}
 
 	
 	@Test
-	public void testGetAll() {
+	public void testGetAllByStatus() {
 
-		Mockito.when(this.bugReportRepository.findAllByStatus("pending")).thenReturn(pendingBugReports);
-		
-		Assert.assertEquals(pendingBugReports, this.bugReportService.findByStatus("pending"));
+		List<BugReport> bg = new ArrayList<>();
+        bg.add(bugReport);
+
+        Mockito.when(bugReportRepository.findAllByStatus("open")).thenReturn(bg);
+
+        //Assert that user is returned
+        Assert.assertEquals("somewhere", this.bugReportService.findByStatus("open").get(0).getLocation());
+        Assert.assertNull(this.bugReportService.findByStatus("open").get(0).getReporter().getPassword());
+        Assert.assertNull(this.bugReportService.findByStatus("open").get(0).getResolver().getPassword());
 				
 	}
+	
 }

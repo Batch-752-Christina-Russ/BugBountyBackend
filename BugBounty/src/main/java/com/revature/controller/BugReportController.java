@@ -31,12 +31,6 @@ public class BugReportController {
 	public List<BugReport> getAllPendingBugReports() {
 		
 		List<BugReport> reports = this.bugReportService.findByStatus("pending");
-		
-		//Make sure that all reports password is null to the client side!
-		for(BugReport b : reports) {
-			b.getReporter().setPassword(null);
-		}
-
 		return reports;
 	}
 	
@@ -48,16 +42,6 @@ public class BugReportController {
 		} else if(bugReport.getStatus().contentEquals("delete")){
 			this.bugReportService.deleteBugReport(bugReport.getId());
 		}
-	}
-	
-	@GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<BugReport> findAllBugReports(){
-		return this.bugReportService.findAllBugReports();
-	}
-	
-	@GetMapping(path= "/{id}")
-	public BugReport findById(@PathVariable int id) {
-		return this.bugReportService.findById(id);
 	}
 	
 	@PostMapping(path = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -76,4 +60,11 @@ public class BugReportController {
 		this.bugReportService.resolve(id, username);
 	}
 
+	@GetMapping(path="/open", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> getBugReportByStatus() {
+		return new ResponseEntity<>(this.bugReportService.findByStatus("open"), HttpStatus.OK);
+	}
+	
+	
+	
 }
