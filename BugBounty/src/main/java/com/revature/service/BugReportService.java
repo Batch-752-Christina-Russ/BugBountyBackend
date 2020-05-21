@@ -22,10 +22,6 @@ public class BugReportService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public List<BugReport> findAllBugReports(){
-		return this.bugReportRepository.findAll();
-	}
-	
 	public BugReport findById(int id) {
 		return this.bugReportRepository.findById(id);
 	}
@@ -48,9 +44,6 @@ public class BugReportService {
 		this.bugReportRepository.deleteById(id);
 	}
 
-	public List<BugReport> findByStatus(String status){
-		return this.bugReportRepository.findAllByStatus(status);
-	}
 	public int sumBugReport(int id) {
 		BugReport br = this.bugReportRepository.findById(id);
 		return this.calculateTimePoints(br) + this.calculateSeverityPoints(br);
@@ -105,5 +98,25 @@ public class BugReportService {
 		Date localDate = calendar.getTime();
 		long daysBetween = ChronoUnit.DAYS.between(bugReportToCheck.getDate().toInstant(), localDate.toInstant());
 		return (int) daysBetween;
+	}
+	
+	public List<BugReport> findByStatus(String status){
+		List<BugReport> bugreports = this.bugReportRepository.findAllByStatus(status);
+		for(BugReport b : bugreports) {
+			switch(status){
+			case "pending": 
+				b.getReporter().setPassword(null);
+				break;
+			case "open":
+				b.getReporter().setPassword(null);
+				break;
+			case "resolved":
+				b.getReporter().setPassword(null);
+				b.getResolver().setPassword(null);
+				break;
+				default:;
+			}
+		}
+		return bugreports;
 	}
 }

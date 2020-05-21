@@ -29,12 +29,6 @@ public class BugReportController {
 	public List<BugReport> getAllPendingBugReports() {
 		
 		List<BugReport> reports = this.bugReportService.findByStatus("pending");
-		
-		//Make sure that all reports password is null to the client side!
-		for(BugReport b : reports) {
-			b.getReporter().setPassword(null);
-		}
-
 		return reports;
 	}
 	
@@ -48,7 +42,6 @@ public class BugReportController {
 		}
 	}
 	
-
 	@PostMapping(path = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<BugReport> saveBugReport(@RequestBody BugReport bugReport) {
 		this.bugReportService.saveBugReport(bugReport);
@@ -66,6 +59,10 @@ public class BugReportController {
 		
 		return new ResponseEntity<>(obj, HttpStatus.OK);
 		
+	}
+	@GetMapping(path="/open", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> getBugReportByStatus() {
+		return new ResponseEntity<>(this.bugReportService.findByStatus("open"), HttpStatus.OK);
 	}
 	
 }
