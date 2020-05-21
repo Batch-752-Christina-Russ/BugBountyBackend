@@ -18,6 +18,22 @@ import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.repository.BugReportRepository;
 
+/**
+ * <h1> Sum Of Report Test</h1>
+* This is a test for the method sumBugReport in BugReportService.
+* 
+* This class mocks a BugReport and tests the sumBugReport method to ensure it returns the proper values
+* 
+* <p>
+* This test mocks a User, BugReport, and Calendar values so that the value returned will be 30. It uses the test specfic method
+* subtractDays to create a calendar and create the exact date for the test to be valid.
+* 
+* @author Colin Baldwin
+* @author Jacob Short
+* @version 1.0
+* 
+*/
+
 //test that sum of 2 reports has correct value
 public class SumOfReport {
 	@Mock

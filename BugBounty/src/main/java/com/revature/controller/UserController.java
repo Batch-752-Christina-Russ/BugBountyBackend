@@ -44,18 +44,21 @@ public class UserController {
 		this.userService.saveUser(user);
 	}
 
+
 	@GetMapping(path="/topten", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getTopTen()
 	{
 		return this.userService.getTopTen();
   }
   
+
 	@PostMapping(path="/login", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public User login(@RequestBody User u) {
 		u = this.userService.login(u.getUsername(), u.getPassword());
 		u.setPassword(null);
 		return u;
 	}
+
 	
 	/**
 	* Returns a Json object that contains the user's rank in the leader board, name, and points. 
@@ -68,5 +71,6 @@ public class UserController {
 	@GetMapping(path="/userrank/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> getRankAndUser(@PathVariable String username) {
 		return new ResponseEntity<>(this.userService.getRankAndUser(username), HttpStatus.OK);
+
 	}
 }
