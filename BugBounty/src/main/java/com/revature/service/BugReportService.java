@@ -72,6 +72,9 @@ public class BugReportService {
 			return worked;
 		}
 		
+		//verify that points are NOT added if bug was already marked resolved
+		if(report.getStatus().toLowerCase().equals("resolved")) return worked;
+		
 		//get resolver's user object
 		User resolver = this.userRepository.findByUsername(username);
 		
@@ -113,7 +116,7 @@ public class BugReportService {
 	public List<BugReport> findByStatus(String status){
 		List<BugReport> bugreports = this.bugReportRepository.findAllByStatus(status);
 		for(BugReport b : bugreports) {
-			switch(status){
+			switch(status.toLowerCase()){
 			case "pending": 
 				b.getReporter().setPassword(null);
 				break;
