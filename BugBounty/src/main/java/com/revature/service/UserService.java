@@ -66,7 +66,11 @@ public class UserService {
 	* @return      Returns an object that contains a user's rank in the leader board, name, and points. 
 	*/
 	public Object getRankAndUser(String username) {
-	return this.userRepository.getRankByUserNameOrderByPoints(username);
+		return this.userRepository.getRankByUserNameOrderByPoints(username);
+	}
+	
+	public User findUserByUsername(String username) {
+		return this.userRepository.findByUsername(username);
+	}
 }
 
-}
