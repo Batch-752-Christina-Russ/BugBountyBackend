@@ -1,14 +1,14 @@
 package com.revature.controller;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,14 +25,22 @@ public class BugReportController {
 	@Autowired
 	private BugReportService bugReportService;
 	
-	@GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<BugReport> findAllBugReports(){
-		return this.bugReportService.findAllBugReports();
+
+	@GetMapping(path="/pending", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<BugReport> getAllPendingBugReports() {
+		
+		List<BugReport> reports = this.bugReportService.findByStatus("pending");
+		return reports;
 	}
 	
-	@GetMapping(path= "/{id}")
-	public BugReport findById(@PathVariable int id) {
-		return this.bugReportService.findById(id);
+	@PostMapping(path="/approvedeny", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void saveUser(@RequestBody BugReport bugReport) {
+				
+		if(bugReport.getStatus().contentEquals("open")) {
+			this.bugReportService.updateBugReportStatus(bugReport);
+		} else if(bugReport.getStatus().contentEquals("delete")){
+			this.bugReportService.deleteBugReport(bugReport.getId());
+		}
 	}
 	
 	@PostMapping(path = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -40,15 +48,22 @@ public class BugReportController {
 		this.bugReportService.saveBugReport(bugReport);
 		return new ResponseEntity<>(bugReport, HttpStatus.OK);
 	}
-	
-	@GetMapping(path = "/delete/{id}")
-	public void deleteBugReport(@PathVariable int id) {
-		this.bugReportService.deleteBugReport(id);
-	}
   
-	@PostMapping("/resolve/{id}/{username}")
-	public void resolution(@PathVariable int id, @PathVariable String username) {
+	@PostMapping(path ="/resolve", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> resolution(@RequestBody Object obj) {
+		
+		int id = (Integer) ((Map)obj).get("id");
+		
+		String username = (String) ((Map)obj).get("username");
+		
 		this.bugReportService.resolve(id, username);
+		
+		return new ResponseEntity<>(obj, HttpStatus.OK);
+		
 	}
-
+	@GetMapping(path="/open", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> getBugReportByStatus() {
+		return new ResponseEntity<>(this.bugReportService.findByStatus("open"), HttpStatus.OK);
+	}
+	
 }
