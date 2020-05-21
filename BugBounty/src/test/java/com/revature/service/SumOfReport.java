@@ -48,13 +48,14 @@ public class SumOfReport {
 	
 	@BeforeSuite
 	public void setUp() {
+		MockitoAnnotations.initMocks(this);
 		role1 = new Role(1, "user");
 		u1 = new User(1, "user", "password", 100, role1);
 		Calendar calendar = Calendar.getInstance(); 
 		Date localDate = subtractDays(calendar.getTime(), 15);
 		// Severity Med (15) + Time (5) = 20
 		r1 = new BugReport(1, u1, u1, "testproject","location", "this is a test", "steps 1 2 3", "med", localDate, "complete");
-		MockitoAnnotations.initMocks(this);
+		
 	}
 	
 	public static Date subtractDays(Date date, int days) {

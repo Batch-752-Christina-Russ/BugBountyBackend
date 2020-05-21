@@ -27,7 +27,6 @@ public class UserService {
 	* 
 	* This method retrieves the 10 ten users from the database based on their point totals.
 	* 
-	* @author Colin Baldwin
 	* @return List<User> the returned list of users for top ten.
 	*/
 	public List<User> getTopTen() {
@@ -38,7 +37,8 @@ public class UserService {
 	 * <h1> Login method</h1>
 	* This method Login allows users to login into their account.
 	* 
-	* By taking username and password, login finds the appropiate row if it exists allowing users to login.
+	* By taking username and password, login finds the appropriate row from the database by calling UserRepository.
+	* if the User exists, access to the user's information and actions will be granted.
 	* 
 	* @param username	user that is being looked up for login
 	* @param password	password entered to see if it matches the user password
@@ -59,7 +59,7 @@ public class UserService {
 	* @return      Returns an object that contains a user's rank in the leader board, name, and points. 
 	*/
 	public Object getRankAndUser(String username) {
-	return this.userRepository.getRankByUserNameOrderByPoints(username);
+		return this.userRepository.getRankByUserNameOrderByPoints(username);
 }
 
 }

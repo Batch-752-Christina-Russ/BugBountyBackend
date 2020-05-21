@@ -46,6 +46,8 @@ public class TopTenServiceTest {
 	
 	@BeforeSuite
 	public void setup() {
+		//initialize Mockito
+				MockitoAnnotations.initMocks(this);
 		//get test objects
 		
 		top10.add(new User(0, "Not the right user", "password", 100, role));
@@ -59,8 +61,7 @@ public class TopTenServiceTest {
 	    top10.add(new User(8, "Jill", "password", 20, role));
 	    top10.add(new User(9, "TooManyUsers", "password", 10, role));
 	    top10.add(new User(10, "Finally", "password", 0, role));
-		//initialize Mockito
-		MockitoAnnotations.initMocks(this);
+		
 	}
 	
 	@Test
