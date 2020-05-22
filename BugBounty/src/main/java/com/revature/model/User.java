@@ -120,13 +120,6 @@ public class User {
 		return true;
 	}
 	
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", points=" + points + ", role="
-				+ role + "]";
-	}
-
 	/**
 	* Converts User object into a String
 	* <p>
@@ -135,6 +128,13 @@ public class User {
 	* @return User instance as a String.
 	* 
 	*/
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", points=" + points + ", role="
+				+ role + "]";
+	}
+
+	
 
 	public User(int id, String username, String password, int points, Role role) {
 		super();

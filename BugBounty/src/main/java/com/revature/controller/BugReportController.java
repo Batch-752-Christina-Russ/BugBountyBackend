@@ -26,7 +26,10 @@ public class BugReportController {
 	@Autowired
 	private BugReportService bugReportService;
 	
-
+	/**
+	* Returns an ArrayList of all BugReports on the database that have a pending status.
+	* @return ArrayList of BugReports with Pending Status
+	*/
 	@GetMapping(path="/pending", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<BugReport> getAllPendingBugReports() {
 		
@@ -34,6 +37,14 @@ public class BugReportController {
 		return reports;
 	}
 	
+	/**
+	* Returns a Json object that approves or denies BugReports on the databse. 
+	* <p>
+	* This method is the end point for approving or denying Bugreports for people to resolve. Approving the Bugreport will
+	* update the report with an open status, allowing other users to examine it while denying the BugReport will delete it completely
+	* from the database.
+	* @param bugReport BugReport to be approved or Denied
+	*/
 	@PostMapping(path="/approvedeny", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void saveUser(@RequestBody BugReport bugReport) {
 				
@@ -44,11 +55,20 @@ public class BugReportController {
 		}
 	}
 	
+	/**
+	* Returns a Json object that contains the BugReport to be saved onto database. 
+	* <p>
+	* This method is the end point for saving Bug Reports to the Database
+	* @param bugReport BugReport to be saved onto database 
+	* @return      a Response Entity with a json body that contains a BugReports and an approved HttpStatus 
+	*/
 	@PostMapping(path = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<BugReport> saveBugReport(@RequestBody BugReport bugReport) {
 		this.bugReportService.saveBugReport(bugReport);
 		return new ResponseEntity<>(bugReport, HttpStatus.OK);
 	}
+	
+	//need clarification on obj parameter use in this method
 	/**
 	* Returns a Json object that contains the BugReports Status open. 
 	* <p>
@@ -74,7 +94,7 @@ public class BugReportController {
 	* <p>
 	* This method is the end point for getting a Bug Reports's with the Status open.
 	*
-	* @return      a Response Entity with a json body that contains a BugReports with the status of open . 
+	* @return      a Response Entity with a json body that contains a BugReports with the status value open . 
 	*/
 
 	@GetMapping(path="/open", produces = MediaType.APPLICATION_JSON_VALUE)

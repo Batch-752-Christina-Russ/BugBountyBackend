@@ -19,6 +19,18 @@ public interface BugReportRepository extends JpaRepository<BugReport, Integer>{
 	<S extends BugReport> S save (BugReport bugReport);
 	void deleteById(int id);
 	
+	
+	/**
+	* Updates a BugReport status where the BugReport has a specific id. 
+	* <p>
+	* This method is the called by the userService and is used for updating a single BugReports's status in the database. 
+	* Uses a nativeQuery GetBugReport which reads as the following: 
+	* "Update BugReport set status=?  where id = ?"
+	* This allows for updating status of a report for saving, deleting, and resolving.
+	*
+	* @param  name of the user that the requester want the rank of.
+	* @return      Returns an object that contains a user's rank in the leader board, name, and points. 
+	*/
 	@Transactional
 	@Modifying
 	@Query("UPDATE BugReport SET status=:status WHERE id=:id")

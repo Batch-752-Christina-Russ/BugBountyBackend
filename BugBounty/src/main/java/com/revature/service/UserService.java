@@ -14,10 +14,19 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	/**
+	 * <h1> getAllUsers method</h1>
+	* The method getAllUsers calls on the repository to retrieve a list of all users that exist on the database
+	* 
+	* @return List<User> the returned list of users for top ten.
+	*/
 	public List<User> getAllUsers(){
 		return this.userRepository.findAll();
 	}
-	
+	/**
+	 * <h1> Save User method</h1>
+	* The method saves user to database, adding the value via UserRepository.
+	*/
 	public void saveUser(User user) {
 		this.userRepository.save(user);
 	}

@@ -189,8 +189,8 @@ public class BugReportService {
 	* that have passed between the bugs submission date and the current day. Then cast that as 
 	* an int which represents the number of points to return. Right now one point is rewarded per day.
 	*
-	* @param  a bug report that has just been resolved. It will use it's submit date.
-	* @return      an int equaling the point value of a resolved bug time bonus.
+	* @param bugReportToCheck a bug report that has just been resolved. It will use it's submit date.
+	* @return                 an int equaling the point value of a resolved bug time bonus.
 	*/
 	public int calculateTimePoints(BugReport bugReportToCheck) {
 		Calendar calendar = Calendar.getInstance(); 
@@ -198,6 +198,17 @@ public class BugReportService {
 		long daysBetween = ChronoUnit.DAYS.between(bugReportToCheck.getDate().toInstant(), localDate.toInstant());
 		return (int) daysBetween;
 	}
+	
+//Need clarification on why set password Null
+	/**
+	* Returns a list of bug reports based on status
+	* <p>
+	* This method takes a string input to search and return all reports who's Status value match the status parameter in an ArrayList.
+	* Additionally, the method sets the password to null
+	*
+	* @param status Status value of BugReports to be returned, if it does not exist returns nothing
+	* @return      Arraylist of Bugreports that Status value match parameter
+	*/
 	
 	public List<BugReport> findByStatus(String status){
 		List<BugReport> bugreports = this.bugReportRepository.findAllByStatus(status);

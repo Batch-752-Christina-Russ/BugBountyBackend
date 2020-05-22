@@ -210,6 +210,13 @@ public class BugReport {
 				+ application + ", location=" + location + ", description=" + description + ", steps=" + steps
 				+ ", severity=" + severity + ", date=" + date + ", status=" + status + "]";
 	}
+	
+	/**
+	* Constructs BugReport with a resolver.
+	* <p>
+	* This constructor creates a BugReport with both a resolver and reporter, this is used for when a BugReport is resolved by a user.
+	* 
+	*/
 	public BugReport(int id, User reporter, User resolver, String application, String location, String description,
 			String steps, String severity, Date date, String status) {
 		super();
@@ -224,6 +231,13 @@ public class BugReport {
 		this.date = date;
 		this.status = status;
 	}
+	
+	/**
+	* Constructs BugReport without a resolver.
+	* <p>
+	* This constructor creates a BugReport without a resolver and reporter, this is used for creating a completely new BugReport for submission.
+	* 
+	*/
 	public BugReport(int id, User reporter, String application, String location, String description,
 			String steps, String severity, Date date, String status) {
 		super();
