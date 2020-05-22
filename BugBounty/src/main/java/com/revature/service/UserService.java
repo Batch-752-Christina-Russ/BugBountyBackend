@@ -74,6 +74,10 @@ public class UserService {
 	*/
 	public Object getRankAndUser(String username) {
 		return this.userRepository.getRankByUserNameOrderByPoints(username);
+	}
+	
+	public User findUserByUsername(String username) {
+		return this.userRepository.findByUsername(username);
+	}
 }
 
-}

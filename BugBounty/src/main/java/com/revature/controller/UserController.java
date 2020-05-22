@@ -94,7 +94,6 @@ public class UserController {
 	* @param  name of the user that the requester wants the rank of.
 	* @return      a Response Entity with a json body that contains a user's rank in the leader board, name, and points. 
 	*/
-
 	@GetMapping(path="/userrank/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> getRankAndUser(@PathVariable String username) {
 		return new ResponseEntity<>(this.userService.getRankAndUser(username), HttpStatus.OK);
