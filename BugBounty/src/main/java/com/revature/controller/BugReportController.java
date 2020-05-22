@@ -38,7 +38,7 @@ public class BugReportController {
 	}
 	
 	@PostMapping(path="/approvedeny", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void saveUser(@RequestBody BugReport bugReport) {
+	public void approveDenyBugReport(@RequestBody BugReport bugReport) {
 				
 		if(bugReport.getStatus().contentEquals("open")) {
 			this.bugReportService.updateBugReportStatus(bugReport);
@@ -69,8 +69,9 @@ public class BugReportController {
 		
 	}
 	@GetMapping(path="/open", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> getBugReportByStatus() {
-		return new ResponseEntity<>(this.bugReportService.findByStatus("open"), HttpStatus.OK);
-	}
+	public List<BugReport> getBugReportByStatus() {
+		List<BugReport> reports = this.bugReportService.findByStatus("open");
+		return reports;	
+		}
 	
 }

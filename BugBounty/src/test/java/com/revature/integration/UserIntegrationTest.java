@@ -51,39 +51,31 @@ public class UserIntegrationTest extends AbstractTestNGSpringContextTests {
 		mockmvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 
-	@Test(dependsOnMethods = { "saveUserTest", "contextLoads" })
-	public void findtUserByUsernameTest() {
-		User testU = this.userService.findUserByUsername("testusername");
-		Assert.assertEquals(testU.getPassword(), "test");
-	}
-
-	@Test(dependsOnMethods = { "saveUserTest", "contextLoads" })
-	public void getAllUsers() {
-		List<User> users = this.userService.getAllUsers();
-
-	}
-
-	@Test(dependsOnMethods = { "contextLoads" }, enabled=false)
-	public void getUserRankTest() {
-		try {
-			mockmvc.perform(get("/user/userrank" + "/testusername")).andExpect(status().isOk())
-					.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andDo(print()).andReturn();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	/**Tests to see if /user/save has new User saved to database*/
 	@Test(dependsOnMethods = { "contextLoads" })
 	public void saveUserTest() {
 		Role r = new Role(1, "user");
 		User u = new User(0, "testusername", "test", 0, r);
-		this.userService.saveUser(u);
-
 		try {
 			ObjectMapper om = new ObjectMapper();
 			String userJson = om.writeValueAsString(u);
 			mockmvc.perform(post("/user/save").contentType(MediaType.APPLICATION_JSON_VALUE).content(userJson))
 					.andExpect(status().isOk()).andDo(print()).andReturn();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		User testU = this.userService.findUserByUsername("testusername");
+		Assert.assertEquals(testU.getRole().getName(), "user");
+		Assert.assertEquals(testU.getPassword(), "test");
+	}
+	
+
+	/**Tests to see if /user/userrank/{username} works*/
+	@Test(dependsOnMethods = { "contextLoads" }, enabled=false)
+	public void getUserRankTest() {
+		try {
+			mockmvc.perform(get("/user/userrank" + "/testusername")).andExpect(status().isOk())
+					.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andDo(print()).andReturn();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
