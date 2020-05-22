@@ -3,6 +3,7 @@ package com.revature.controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -58,7 +59,7 @@ public class ResolutionControllerTest {
 		Mockito.when(this.userService.resolve(5, "loki")).thenReturn(true);
 		
 		try {
-			mockMvc.perform(post("/bugreport/resolve/")).andExpect(status().isOk()) //needs the /{id}/{username}
+			mockMvc.perform(post("/bugreport/resolve/")).andExpect(status().isOk()); //needs the /{id}/{username}
 			String jsonBody = "{\"id\":5, \"username\":\"loki\"}";
 			
 			
