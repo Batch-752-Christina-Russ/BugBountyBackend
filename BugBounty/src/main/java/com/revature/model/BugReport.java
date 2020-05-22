@@ -102,6 +102,16 @@ public class BugReport {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+
+	/**
+	* Converts BugReport object values into Hashcode
+	* <p>
+	* This method is used to convert the values of the selected BugReport into Hash Code and returns those values as an int.
+	*
+	* @return returns int value from hashcode
+	* 
+	*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -118,6 +128,15 @@ public class BugReport {
 		result = prime * result + ((steps == null) ? 0 : steps.hashCode());
 		return result;
 	}
+	/**
+	* Returns a boolean if this BugReport equals in value to the parameter entered
+	* <p>
+	* This method is used to check if the BugReport is equal to object and checking if the obj is null.
+	* 
+	* @param  obj  object that is to be compared to instance of BugReport class
+	* @return true if BugReport equals parameter, obj is not null, and value of BugReport equals value of parameter,
+	* 
+	*/
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -176,6 +195,15 @@ public class BugReport {
 			return false;
 		return true;
 	}
+	
+	/**
+	* Converts BugReport object into a String
+	* <p>
+	* This method overrides the toString method to output proper format for webpages.
+	*
+	* @return BugReport instance as a String.
+	* 
+	*/
 	@Override
 	public String toString() {
 		return "BugReport [id=" + id + ", reporter=" + reporter + ", resolver=" + resolver + ", application="

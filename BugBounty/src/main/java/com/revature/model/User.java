@@ -59,6 +59,15 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+	
+	/**
+	* Converts User object values into Hashcode
+	* <p>
+	* This method is used to convert the values of the selected User into Hash Code and returns those values as an int.
+	*
+	* @return returns int value from hashcode
+	* 
+	*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,6 +79,16 @@ public class User {
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+	
+	/**
+	* Returns a boolean if the instance of User equals in value to the parameter entered
+	* <p>
+	* This method is used to check if the instance of User is equal to object and checking if the obj is null.
+	* 
+	* @param  obj  object that is to be compared to instance of User class
+	* @return true if Role equals parameter, obj is not null, and value of User equals value of parameter,
+	* 
+	*/
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -108,7 +127,14 @@ public class User {
 				+ role + "]";
 	}
 
-
+	/**
+	* Converts User object into a String
+	* <p>
+	* This method overrides the toString method to output proper format for webpages.
+	*
+	* @return User instance as a String.
+	* 
+	*/
 
 	public User(int id, String username, String password, int points, Role role) {
 		super();

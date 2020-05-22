@@ -23,9 +23,7 @@ public class UserService {
 	}
 	/**
 	 * <h1> getTopTen method</h1>
-	* This the method getTopTen() from the database.
-	* 
-	* This method retrieves the 10 ten users from the database based on their point totals.
+	* The method getTopTen retrieves the 10 ten users from the database based on their point totals.
 	* 
 	* @return List<User> the returned list of users for top ten.
 	*/

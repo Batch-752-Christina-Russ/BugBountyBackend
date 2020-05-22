@@ -29,21 +29,41 @@ public class UserController {
 		this.userService = userService;
 	}
 	
+	/**
+	* This method is the end point used for testing to ensure the end points work. 
+	*
+	* @return      String value of "Hello Devin".
+	*/
+	
 	@GetMapping(path="/test", produces = MediaType.TEXT_HTML_VALUE)
 	public String test() {
 		return ("Hello Devin");
 	}
 	
+	/**
+	* This method is the end point that returns all Users on the database into an ArrayList. 
+	*
+	* @return      ArrayList of all Users on the database.
+	*/
+	
 	@GetMapping(path="/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getAllUsers() {
 		return this.userService.getAllUsers();
 	}
-	
+	/**
+	* This method is the end point for Saving user to database.
+	*
+	*/
 	@PostMapping(path="/save", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void saveUser(@RequestBody User user) {
 		this.userService.saveUser(user);
 	}
 
+	/**
+	* This method is the end point that returns an ArrayList containing the top ten users from the database based on their point values.
+	*
+	* @return    Arraylist containing top ten users with the highest point values.
+	*/
 
 	@GetMapping(path="/topten", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getTopTen()
@@ -51,6 +71,12 @@ public class UserController {
 		return this.userService.getTopTen();
   }
   
+	/**
+	* This method is the end point that returns a User that contains the user's rank in the leader board, name, and points. 
+	*
+	* @param  u 	the user object that contains the info needed to login.
+	* @return      User that was successfully logged into.
+	*/
 
 	@PostMapping(path="/login", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public User login(@RequestBody User u) {

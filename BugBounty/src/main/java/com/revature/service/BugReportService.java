@@ -50,7 +50,6 @@ public class BugReportService {
 	}
 	
 	
-	//NEED HELP ON THIS ONE
 	/**
 	* Checks if a BugReport has a Null value and if it is not null and is Present returns a boolean based on this check.
 	* <p>
@@ -72,7 +71,14 @@ public class BugReportService {
 	}
 	
 
-
+	/**
+	* Updates a BugReport Status on the database.
+	* <p>
+	* This method deletes a BugReport from the database that has an id that matches the inputed parameter.
+	*
+	* @param id int value used to find the report in the database and delete it
+	* 
+	*/
 
 	public void updateBugReportStatus(BugReport bugReport) {
 		//this.bugReportRepository.save(bugReport);
@@ -145,8 +151,6 @@ public class BugReportService {
 	* 
 	*/
 	
-
-
 	public boolean resolve(int id, String username) {
 		//boolean to check status
 		boolean worked = false;

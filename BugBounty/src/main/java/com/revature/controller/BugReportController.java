@@ -1,5 +1,6 @@
 package com.revature.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,7 +49,13 @@ public class BugReportController {
 		this.bugReportService.saveBugReport(bugReport);
 		return new ResponseEntity<>(bugReport, HttpStatus.OK);
 	}
-  
+	/**
+	* Returns a Json object that contains the BugReports Status open. 
+	* <p>
+	* This method is the end point for resolving bugs and ensuring that the creator and resolver of a bug report are different users.
+	* @param obj 
+	* @return      a Response Entity with a json body that contains a BugReports with the status of open . 
+	*/
 	@PostMapping(path ="/resolve", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> resolution(@RequestBody Object obj) {
 		
@@ -61,6 +68,15 @@ public class BugReportController {
 		return new ResponseEntity<>(obj, HttpStatus.OK);
 		
 	}
+	
+	/**
+	* Returns a Json object that contains the BugReports Status open. 
+	* <p>
+	* This method is the end point for getting a Bug Reports's with the Status open.
+	*
+	* @return      a Response Entity with a json body that contains a BugReports with the status of open . 
+	*/
+
 	@GetMapping(path="/open", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> getBugReportByStatus() {
 		return new ResponseEntity<>(this.bugReportService.findByStatus("open"), HttpStatus.OK);
