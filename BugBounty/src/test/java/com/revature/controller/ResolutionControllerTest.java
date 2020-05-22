@@ -55,11 +55,10 @@ public class ResolutionControllerTest {
 	}
 	
 	@Test
-	public void ResolutionControllerTest() {
+	public void ControllerTest() {
 		Mockito.when(this.userService.resolve(5, "loki")).thenReturn(true);
 		
 		try {
-			mockMvc.perform(post("/bugreport/resolve/")).andExpect(status().isOk()); //needs the /{id}/{username}
 			String jsonBody = "{\"id\":5, \"username\":\"loki\"}";
 			
 			
