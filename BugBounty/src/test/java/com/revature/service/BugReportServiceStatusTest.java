@@ -34,7 +34,7 @@ public class BugReportServiceStatusTest {
 		Role adminRole = new Role(2, "admin");
 		Role userRole = new Role(1, "user");
 		User firstUser = new User(1, "darthvader", "lightsaber", 0, adminRole);
-		User secondUser = new User(2, "billcipher", "triangle", 0, userRole);
+		User secondUser = null;
 		bugReport = new BugReport(id, firstUser, secondUser, "BugBounty", "somewhere",
 				"hitting any key causes machine to explode.", "open app and hit any key", "LOW",
 				new Date(), "open");
@@ -55,6 +55,6 @@ public class BugReportServiceStatusTest {
 		//Assert that user is returned
 		Assertions.assertEquals("somewhere", this.bugReportService.findByStatus("open").get(0).getLocation());
 		Assertions.assertNull(this.bugReportService.findByStatus("open").get(0).getReporter().getPassword());
-		Assertions.assertNull(this.bugReportService.findByStatus("open").get(0).getResolver().getPassword());
+		Assertions.assertNull(this.bugReportService.findByStatus("open").get(0).getResolver());
 	}
 }
