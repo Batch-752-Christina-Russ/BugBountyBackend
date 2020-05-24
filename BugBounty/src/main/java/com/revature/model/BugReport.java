@@ -215,7 +215,16 @@ public class BugReport {
 	* Constructs BugReport with a resolver.
 	* <p>
 	* This constructor creates a BugReport with both a resolver and reporter, this is used for when a BugReport is resolved by a user.
-	* 
+	*  @param id			id of BugReport for the Database
+	*  @param reporter		user that submitted BugReport
+	*  @param resolver		user that fixed the bug in the program
+	*  @param application	name of project the bug was found in
+	*  @param location		location of bug in the document
+	*  @param description	description of the bug problem
+	*  @param steps			steps required to solve bug
+	*  @param severity  	ranking of how important the bug is that needs to be fixed
+	*  @param date   		date of creation of report
+	*  @param status 		current status of report by default pending
 	*/
 	public BugReport(int id, User reporter, User resolver, String application, String location, String description,
 			String steps, String severity, Date date, String status) {
@@ -236,7 +245,15 @@ public class BugReport {
 	* Constructs BugReport without a resolver.
 	* <p>
 	* This constructor creates a BugReport without a resolver and reporter, this is used for creating a completely new BugReport for submission.
-	* 
+	*  @param id			id of BugReport for the Database
+	*  @param reporter		user that submitted BugReport
+	*  @param application	name of project the bug was found in
+	*  @param location		location of bug in the document
+	*  @param description	description of the bug problem
+	*  @param steps			steps required to solve bug
+	*  @param severity  	ranking of how important the bug is that needs to be fixed
+	*  @param date   		date of creation of report
+	*  @param status 		current status of report by default pending
 	*/
 	public BugReport(int id, User reporter, String application, String location, String description,
 			String steps, String severity, Date date, String status) {

@@ -29,33 +29,102 @@ public class User {
 	@JoinColumn(name="role_id")
 	private Role role;
 	
+	/**
+	* returns the id value of User.
+	*
+	* @return id value of object
+	* 
+	*/
 	public int getId() {
 		return id;
 	}
+	
+	/**
+	* sets the id value of User.
+	*
+	* @param id  new id value for User
+	* 
+	*/
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	/**
+	* returns the username value of User.
+	*
+	* @return username value of User
+	* 
+	*/
 	public String getUsername() {
 		return username;
 	}
+	
+	/**
+	* sets the username value of User.
+	*
+	* @param username  new username value for User
+	* 
+	*/
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	/**
+	* returns the password value of User.
+	*
+	* @return password value of User
+	* 
+	*/
 	public String getPassword() {
 		return password;
 	}
+	
+	/**
+	* sets the password value of User.
+	*
+	* @param username  new password value for User
+	* 
+	*/
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	/**
+	* returns the total points a User has.
+	*
+	* @return password value of User
+	* 
+	*/
 	public int getPoints() {
 		return points;
 	}
+	
+	/**
+	* sets the points value of User.
+	*
+	* @param username  new points value for User
+	* 
+	*/
 	public void setPoints(int points) {
 		this.points = points;
 	}
+	
+	/**
+	* returns the Role object of User.
+	*
+	* @return Role object of User
+	* 
+	*/
 	public Role getRole() {
 		return role;
 	}
+	
+	/**
+	* sets the Role object for specified user.
+	*
+	* @param role  new Role object for User
+	* 
+	*/
 	public void setRole(Role role) {
 		this.role = role;
 	}

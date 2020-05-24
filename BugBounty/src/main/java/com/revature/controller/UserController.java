@@ -52,7 +52,7 @@ public class UserController {
 	}
 	/**
 	* This method is the end point for Saving user to database.
-	*
+	*@param user user to be saved to database
 	*/
 	@PostMapping(path="/save", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void saveUser(@RequestBody User user) {
@@ -91,7 +91,7 @@ public class UserController {
 	* <p>
 	* This method is the end point for getting a single user's rank in the leader board.
 	*
-	* @param  name of the user that the requester wants the rank of.
+	* @param  username name of the user that the requester wants the rank of.
 	* @return      a Response Entity with a json body that contains a user's rank in the leader board, name, and points. 
 	*/
 	@GetMapping(path="/userrank/{username}", produces = MediaType.APPLICATION_JSON_VALUE)

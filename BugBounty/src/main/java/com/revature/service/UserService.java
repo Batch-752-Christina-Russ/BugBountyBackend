@@ -18,7 +18,7 @@ public class UserService {
 	 * <h1> getAllUsers method</h1>
 	* The method getAllUsers calls on the repository to retrieve a list of all users that exist on the database
 	* 
-	* @return List<User> the returned list of users for top ten.
+	* @return List of ten users with the highest points score.
 	*/
 	public List<User> getAllUsers(){
 		return this.userRepository.findAll();
@@ -26,6 +26,7 @@ public class UserService {
 	/**
 	 * <h1> Save User method</h1>
 	* The method saves user to database, adding the value via UserRepository.
+	* @param user user to be saved to database
 	*/
 	public void saveUser(User user) {
 		this.userRepository.save(user);
@@ -34,7 +35,7 @@ public class UserService {
 	 * <h1> getTopTen method</h1>
 	* The method getTopTen retrieves the 10 ten users from the database based on their point totals.
 	* 
-	* @return List<User> the returned list of users for top ten.
+	* @return  the returned list of users for top ten in and ArrayList.
 	*/
 	public List<User> getTopTen() {
 		List<User> topTen =  this.userRepository.findFirst10ByOrderByPointsDesc();
@@ -69,12 +70,21 @@ public class UserService {
 	* <p>
 	* This method is the called by the end point for getting a single user's rank in the leader board.
 	*
-	* @param  name of the user that the requester want the rank of.
+	* @param username name of the user that the requester want the rank of.
 	* @return      Returns an object that contains a user's rank in the leader board, name, and points. 
 	*/
 	public Object getRankAndUser(String username) {
 		return this.userRepository.getRankByUserNameOrderByPoints(username);
 	}
+	
+	/**
+	 * <h1> Login method</h1>
+	* This method returns a user with a specific username.
+	* 
+	* @param username	username that is being used to find user on database  
+	* @return User the returned user if it exists
+	* 
+	*/
 	
 	public User findUserByUsername(String username) {
 		return this.userRepository.findByUsername(username);

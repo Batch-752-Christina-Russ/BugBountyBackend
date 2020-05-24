@@ -34,7 +34,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	* Basically we want to order the table of user by their points, assign them a rank in that order, then select the
 	* user that was passed in and retrieve their rank, username, and points fields.
 	*
-	* @param  name of the user that the requester want the rank of.
+	* @param username name of the user that the requester want the rank of.
 	* @return      Returns an object that contains a user's rank in the leader board, name, and points. 
 	*/
 	@Query(value=GetRanked, nativeQuery = true)

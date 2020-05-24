@@ -76,12 +76,11 @@ public class BugReportController {
 		return new ResponseEntity<>(bugReport, HttpStatus.OK);
 	}
 	
-	//need clarification on obj parameter use in this method
 	/**
 	* Returns a Json object that contains the BugReports Status open. 
 	* <p>
 	* This method is the end point for resolving bugs and ensuring that the creator and resolver of a bug report are different users.
-	* @param obj 
+	* @param obj   generic object to hold json
 	* @return      a Response Entity with a json body that contains a BugReports with the status of open . 
 	*/
 	@PostMapping(path ="/resolve", consumes = MediaType.APPLICATION_JSON_VALUE)

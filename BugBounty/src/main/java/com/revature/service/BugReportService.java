@@ -76,7 +76,7 @@ public class BugReportService {
 	* <p>
 	* This method deletes a BugReport from the database that has an id that matches the inputed parameter.
 	*
-	* @param id int value used to find the report in the database and delete it
+	* @param bugReport BugReport to be updated
 	* 
 	*/
 
@@ -142,12 +142,13 @@ public class BugReportService {
 	/**
 	* Updates the users current score when a new report is submitted.
 	* <p>
-	* This method is used after a new Bugreport is submitted, using id parameter to identify the bug report to be calculated
+	* This method is used after a new BugReport is submitted, using id parameter to identify the bug report to be calculated
 	*  and the sum of the points from the report are calculated,
 	* with that value it adds it to the user with username that equals username parameter.
 	*
 	* @param  id  id for BugReport object used for getting sum value
 	* @param username username of User to be used to calculate new score
+	* @return returns false if  report is null or if the bug was already resolved. otherwise the BugReport is updated and method returns true
 	* 
 	*/
 	
@@ -202,12 +203,11 @@ public class BugReportService {
 		return (int) daysBetween;
 	}
 	
-//Need clarification on why set password Null
 	/**
 	* Returns a list of bug reports based on status
 	* <p>
 	* This method takes a string input to search and return all reports who's Status value match the status parameter in an ArrayList.
-	* Additionally, the method sets the password to null
+	* Additionally, the method sets the password to null to prevent user from seeing other users password
 	*
 	* @param status Status value of BugReports to be returned, if it does not exist returns nothing
 	* @return      Arraylist of Bugreports that Status value match parameter
