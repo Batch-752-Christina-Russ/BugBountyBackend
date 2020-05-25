@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mockito.MockitoAnnotations;
@@ -15,13 +16,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.BugBountyApplication;
 import com.revature.model.Role;
@@ -71,14 +73,55 @@ public class UserIntegrationTest extends AbstractTestNGSpringContextTests {
 	
 
 	/**Tests to see if /user/userrank/{username} works*/
+	/** Test depends on specific PostgreSQL query in Repository*/
 	@Test(dependsOnMethods = { "contextLoads" }, enabled=false)
 	public void getUserRankTest() {
+		int rank = 0;
 		try {
-			mockmvc.perform(get("/user/userrank" + "/testusername")).andExpect(status().isOk())
-					.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andDo(print()).andReturn();
+			MvcResult result = mockmvc.perform(get("/user/userrank" + "/testusername"))
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+			.andDo(print()).andReturn();
+			
+			//Get result
+			ObjectMapper om = new ObjectMapper();
+			rank = om.readValue(result.getResponse().getContentAsString(), new TypeReference<Integer>() {});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		//should return an int value greater than 0
+		Assert.assertTrue(rank > 0);
 	}
+	
+	/**Tests to see if user/topten works*/
+	@Test(dependsOnMethods = { "contextLoads"})
+	public void getTopTenTest() {
+		//list to hold topTen
+		List<User> topTenList = new ArrayList<User>();
+		
+		try {
+			MvcResult result = mockmvc.perform(get("/user/topten"))
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+			.andDo(print()).andReturn();
+			
+			//getList
+			ObjectMapper om = new ObjectMapper();
+			topTenList = om.readValue(result.getResponse().getContentAsString(), new TypeReference<List<User>>() {});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//test size = 10
+		Assert.assertEquals(topTenList.size(), 10);
+		
+		//verify passwords are null
+		Assert.assertNull(topTenList.get(0).getPassword());
+		
+		//verify value to left is larger or equal
+		Assert.assertTrue(topTenList.get(0).getPoints() >= topTenList.get(1).getPoints());
+	}
+	
 
 }
