@@ -59,11 +59,14 @@ public class UserController {
 		this.userService.saveUser(user);
 	}
 
+
 	/**
 	* This method is the end point that returns an ArrayList containing the top ten users from the database based on their point values.
 	*
 	* @return    Arraylist containing top ten users with the highest point values.
 	*/
+
+
 
 	@GetMapping(path="/topten", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getTopTen()
@@ -71,6 +74,7 @@ public class UserController {
 		return this.userService.getTopTen();
   }
   
+
 	/**
 	* This method is the end point that returns a User that contains the user's rank in the leader board, name, and points. 
 	*
@@ -84,8 +88,8 @@ public class UserController {
 		u.setPassword(null);
 		return u;
 	}
-
 	
+
 	/**
 	* Returns a Json object that contains the user's rank in the leader board, name, and points. 
 	* <p>
@@ -94,9 +98,9 @@ public class UserController {
 	* @param  username name of the user that the requester wants the rank of.
 	* @return      a Response Entity with a json body that contains a user's rank in the leader board, name, and points. 
 	*/
+
 	@GetMapping(path="/userrank/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> getRankAndUser(@PathVariable String username) {
 		return new ResponseEntity<>(this.userService.getRankAndUser(username), HttpStatus.OK);
-
 	}
 }

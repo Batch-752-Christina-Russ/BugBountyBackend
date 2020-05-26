@@ -203,16 +203,20 @@ public class BugReportService {
 		return (int) daysBetween;
 	}
 	
-	/**
-	* Returns a list of bug reports based on status
+
+
+	/** Finds all BugReports by a given bug status.  
 	* <p>
-	* This method takes a string input to search and return all reports who's Status value match the status parameter in an ArrayList.
-	* Additionally, the method sets the password to null to prevent user from seeing other users password
+	* This method gets a List of BugReport Objects that have specified status value.  These status are strings 
+	* and can be "open," "pending," or "resolved."  "open" is when a BugReport has been approved by an admin, 
+	* "pending" is a recently submitted BugReport that has not been approved or denied by an admin, "resolved" are
+	* BugReports that have been completed by a User and points have been rewarded.  Passwords for resolvers and reporters are also
+	* set to null before returning.  
 	*
-	* @param status Status value of BugReports to be returned, if it does not exist returns nothing
-	* @return      Arraylist of Bugreports that Status value match parameter
+	* @param  A String that indicates the wanted BugReport status type.
+	* @return A List of all BugReport Objects with the desired status type.
 	*/
-	
+
 	public List<BugReport> findByStatus(String status){
 		List<BugReport> bugreports = this.bugReportRepository.findAllByStatus(status);
 		for(BugReport b : bugreports) {
