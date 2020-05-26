@@ -78,7 +78,7 @@ public class UserIntegrationTest extends AbstractTestNGSpringContextTests {
 	public void getUserRankTest() {
 		int rank = 0;
 		try {
-			MvcResult result = mockmvc.perform(get("/user/userrank" + "/testusername"))
+			MvcResult result = mockmvc.perform(get("/user/userrank" + "/Cody"))
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 			.andDo(print()).andReturn();
@@ -123,5 +123,31 @@ public class UserIntegrationTest extends AbstractTestNGSpringContextTests {
 		Assert.assertTrue(topTenList.get(0).getPoints() >= topTenList.get(1).getPoints());
 	}
 	
-
+	/** Tests to see if login works e2e*/
+	@Test(dependsOnMethods = { "contextLoads"})
+	public void loginTest() {
+		//User object to return
+		User user = new User();
+		
+		try {
+			//Json to send
+			ObjectMapper om = new ObjectMapper();
+			User test = new User(0, "Stephanie", "pass", 0, new Role(1, "user"));
+			String userJson = om.writeValueAsString(test);
+			
+			MvcResult result = mockmvc.perform(post("/user/login").contentType(MediaType.APPLICATION_JSON_VALUE).content(userJson))
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+			.andDo(print()).andReturn();
+			
+			//Get result
+			user = om.readValue(result.getResponse().getContentAsString(), new TypeReference<User>() {});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//Verify user is the same & the password is null
+		Assert.assertEquals(user.getUsername(), "Stephanie");
+		Assert.assertNull(user.getPassword());
+	}
 }

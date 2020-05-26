@@ -1,13 +1,9 @@
 package com.revature.integration;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
@@ -25,17 +21,17 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.BugBountyApplication;
+import com.revature.model.BugReport;
 import com.revature.model.Role;
 import com.revature.model.User;
-import com.revature.model.BugReport;
 import com.revature.service.BugReportService;
+import com.revature.service.UserService;
 
 @SpringBootTest(classes = BugBountyApplication.class)
 @WebAppConfiguration
@@ -43,6 +39,9 @@ public class BugReportIntegrationTest extends AbstractTestNGSpringContextTests {
 
 	@Autowired
 	private BugReportService bugReportService;
+	
+	@Autowired
+	private UserService userService;
 
 	private MockMvc mockmvc;
 
@@ -173,6 +172,30 @@ public class BugReportIntegrationTest extends AbstractTestNGSpringContextTests {
 	 */
 	@Test(dependsOnMethods = {"contextLoads", "pendingStatusBugReportTest", "openStatusBugReportTest", "denyBugReportTest"})
 	public void resolveBugReportTest() {
+		String jsonBody = "{\"id\":1, \"username\":\"Connor\"}";
+		User user = this.userService.findUserByUsername("Connor");
+		int pointsBefore = user.getPoints();
+		
+		try {
+			
+			mockmvc.perform(post("/bugreport/resolve").contentType(MediaType.APPLICATION_JSON_VALUE).content(jsonBody))
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+			.andDo(print());
+
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		//verify report is resolved
+		BugReport report = this.bugReportService.findById(1);
+		Assert.assertEquals(report.getStatus(), "resolved");
+		
+		User u2 = this.userService.findUserByUsername("Connor");
+		int points = u2.getPoints();
+		
+		//verify Users points added
+		Assert.assertTrue(points > pointsBefore);
 		
 	}
 	
