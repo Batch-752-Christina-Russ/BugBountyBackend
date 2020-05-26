@@ -38,15 +38,14 @@ public class ApproveDenyBugServiceTest {
 	
 	@Test
 	public void testUpdateBugReportStatus() {
-
-		Mockito.verify(bugReportRepository, atLeastOnce()).updateStatus(8, "open");
 		bugReportService.updateBugReportStatus(bugReport);
+		Mockito.verify(bugReportRepository, atLeastOnce()).updateStatus(8, "open");
 	}
 	
 	@Test
-	public void testDeleteBugReport() {		
-		Mockito.verify(bugReportRepository, atLeastOnce()).deleteById(8);
+	public void testDeleteBugReport() {
 		bugReportService.deleteBugReport(8);
+		Mockito.verify(bugReportRepository, atLeastOnce()).deleteById(8);
 	}
 
 }
