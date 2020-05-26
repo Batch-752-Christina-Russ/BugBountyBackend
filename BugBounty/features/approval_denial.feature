@@ -1,31 +1,19 @@
-#Author: your.email@your.domain.com
-#Keywords Summary :
-#Feature: List of scenarios.
-#Scenario: Business rule through list of steps with arguments.
-#Given: Some precondition step
-#When: Some key actions
-#Then: To observe outcomes or validation
-#And,But: To enumerate more Given,When,Then steps
-#Scenario Outline: List of steps for data-driven as an Examples and <placeholder>
-#Examples: Container for s table
-#Background: List of steps run before each of the scenarios
-#""" (Doc Strings)
-#| (Data Tables)
-#@ (Tags/Labels):To group Scenarios
-#<> (placeholder)
-#""
-## (Comments)
-#Sample Feature Definition Template
-Background: Given <admin> is signed in
- 
-  Scenario: I want to approve a bug
-	  Given <admin> is logged in
-	  And <bug_report> exists
-	  When <admin> selects approve
-	  Then <bug_report> status is approved
+
+Feature: I want to approve and deny bug request
+
+ 	Background: Given "admin" is logged in
+	 	Given I navigate to the login page
+		When I submit username and password
+		Then I should be logged in
+	
+ 	Scenario: I want to approve a bug
+	  Given admin is logged in
+	  And bug report exists
+	  When admin selects "approve"
+	  Then bug report status is "open"
   
-  Scenario: I want to deny a bug
-	  Given <admin> is logged in
-	  And <bug_report> exists
-	  When <admin> selects deny
-	  Then <bug_report> is deleted
+ 	Scenario: I want to deny a bug
+	  Given admin is logged in
+	  And bug report exists
+	  When admin selects "deny"
+	  Then bug report status is "deleted"

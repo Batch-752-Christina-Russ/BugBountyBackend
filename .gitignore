@@ -78,3 +78,5 @@ application.properties
 .DS_Store
 Thumbs.db
 BugBounty/drivers/chromedriver.exe
+BugBounty/src/test/resources/data.sql
+BugBounty/src/test/resources/testng.xml
