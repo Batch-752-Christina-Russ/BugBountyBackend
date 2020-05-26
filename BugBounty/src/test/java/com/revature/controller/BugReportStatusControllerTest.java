@@ -64,13 +64,13 @@ public class BugReportStatusControllerTest {
 	}
   
 	@Test
-	public void testTheUserRankController() {
+	public void testFindBugReportByStatus() {
 		
 		when(this.bugReportService.findByStatus("pending")).thenReturn(bg);	
 		try {
 			
 			
-			mockMVC.perform(get("/bugreport/status" + "/pending"))
+			mockMVC.perform(get("/bugreport/" + "pending"))
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 			.andDo(print())
