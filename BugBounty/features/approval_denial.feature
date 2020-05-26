@@ -7,13 +7,13 @@ Feature: I want to approve and deny bug request
 		Then I should be logged in
 	
  	Scenario: I want to approve a bug
-	  Given "admin" is logged in
+	  Given admin is logged in
 	  And bug report exists
 	  When admin selects "approve"
 	  Then bug report status is "open"
   
  	Scenario: I want to deny a bug
-	  Given "admin" is logged in
+	  Given admin is logged in
 	  And bug report exists
 	  When admin selects "deny"
 	  Then bug report is "deleted"
