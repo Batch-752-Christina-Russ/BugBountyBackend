@@ -77,3 +77,4 @@ application.properties
 # System Files
 .DS_Store
 Thumbs.db
+BugBounty/drivers/chromedriver.exe
