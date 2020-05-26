@@ -16,4 +16,4 @@ Feature: I want to approve and deny bug request
 	  Given admin is logged in
 	  And bug report exists
 	  When admin selects "deny"
-	  Then bug report is "deleted"
+	  Then bug report status is "deleted"

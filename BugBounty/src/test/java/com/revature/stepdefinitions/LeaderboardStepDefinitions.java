@@ -32,7 +32,7 @@ public class LeaderboardStepDefinitions {
 		driver.get(URL);
 		driver.manage().window().maximize();
 		loginPage = new LoginPage(driver);
-		loginPage.login("admin", "pass");
+		loginPage.login("Admin", "pass");
 		WebDriverWait wait = new WebDriverWait(driver, 2);
 		wait.until(ExpectedConditions.urlContains("home"));
 

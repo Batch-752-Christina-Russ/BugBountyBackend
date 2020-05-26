@@ -74,6 +74,7 @@ public class ApprovalDenialStepDefinitions {
 		  case "approve":
 			  WebElement approveButton = this.driver.findElement(By.id("card-1")).findElement(By.className("btn-success"));
 			  approveButton.click();
+			  
 			  break;
 		  case "deny":
 			  WebElement denyButton = this.driver.findElement(By.id("card-3")).findElement(By.className("btn-danger"));
@@ -81,35 +82,43 @@ public class ApprovalDenialStepDefinitions {
 		    break;
 		  default:
 		}
-
+		
 	}
 
 	@Then("bug report status is {string}")
 	public void bug_report_status_is(String string) {
 		boolean card;
-		
-		try{
-			 card = this.driver.findElement(By.id("card-1")).isDisplayed();
-		}catch( Exception e) {
-			card = false;
-		}
-		
-	    Assert.assertEquals(card, false);
-	    this.driver.quit();
-	}
+		WebDriverWait wait = new WebDriverWait(driver, 2);
+		switch(string) {
+		  case "open":
+			  try{
+					wait.until(ExpectedConditions.invisibilityOf(this.driver.findElement(By.id("card-1"))));
 
-	@Then("bug report is {string}")
-	public void bug_report_is(String string) {
-		boolean card;
-		
-		try{
-			 card = this.driver.findElement(By.id("card-3")).isDisplayed();
-		}catch( Exception e) {
-			card = false;
+					 card = this.driver.findElement(By.id("card-1")).isDisplayed();
+				}catch( Exception e) {
+					card = false;
+				}
+				
+			    Assert.assertEquals(card, false);
+			    this.driver.quit();
+			  
+			  break;
+		  case "deleted":
+			  try{
+					wait.until(ExpectedConditions.invisibilityOf(this.driver.findElement(By.id("card-3"))));
+
+					 card = this.driver.findElement(By.id("card-3")).isDisplayed();
+				}catch( Exception e) {
+					card = false;
+				}
+				
+			    Assert.assertEquals(card, false);
+			    this.driver.quit();
+			  
+			  break;
+		  default:
 		}
-		
-	    Assert.assertEquals(card, false);
-	    this.driver.quit();
+
 	}
 
 	@AfterClass
