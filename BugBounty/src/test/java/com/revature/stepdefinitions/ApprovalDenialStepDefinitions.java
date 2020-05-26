@@ -45,7 +45,7 @@ public class ApprovalDenialStepDefinitions {
 
 	@When("I submit username and password")
 	public void i_submit_username_and_password() {
-		loginPage.login("admin", "pass");
+		loginPage.login("Admin", "pass");
 		WebDriverWait wait = new WebDriverWait(driver, 2);
 		wait.until(ExpectedConditions.urlContains("home"));
 	}
@@ -65,18 +65,18 @@ public class ApprovalDenialStepDefinitions {
 		navbar.clickPendingBug();
 		WebDriverWait wait = new WebDriverWait(driver, 2);
 		wait.until(ExpectedConditions.urlContains("pendingbug"));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("card-19")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("card-5")));
 	}
 
 	@When("admin selects {string}")
 	public void admin_selects(String string) {
 		switch(string) {
 		  case "approve":
-			  WebElement approveButton = this.driver.findElement(By.id("card-19")).findElement(By.className("btn-success"));
+			  WebElement approveButton = this.driver.findElement(By.id("card-1")).findElement(By.className("btn-success"));
 			  approveButton.click();
 			  break;
 		  case "deny":
-			  WebElement denyButton = this.driver.findElement(By.id("card-19")).findElement(By.className("btn-danger"));
+			  WebElement denyButton = this.driver.findElement(By.id("card-3")).findElement(By.className("btn-danger"));
 			  denyButton.click();
 		    break;
 		  default:
@@ -86,12 +86,30 @@ public class ApprovalDenialStepDefinitions {
 
 	@Then("bug report status is {string}")
 	public void bug_report_status_is(String string) {
-	    // Write code here that turns the phrase above into concrete actions
+		boolean card;
+		
+		try{
+			 card = this.driver.findElement(By.id("card-1")).isDisplayed();
+		}catch( Exception e) {
+			card = false;
+		}
+		
+	    Assert.assertEquals(card, false);
+	    this.driver.quit();
 	}
 
 	@Then("bug report is {string}")
 	public void bug_report_is(String string) {
-	    // Write code here that turns the phrase above into concrete actions
+		boolean card;
+		
+		try{
+			 card = this.driver.findElement(By.id("card-3")).isDisplayed();
+		}catch( Exception e) {
+			card = false;
+		}
+		
+	    Assert.assertEquals(card, false);
+	    this.driver.quit();
 	}
 
 	@AfterClass
