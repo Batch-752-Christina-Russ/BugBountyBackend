@@ -1,5 +1,5 @@
 package com.revature.cucumberoptions;
 
-public class ParameterTypes {
+public class CucumberTestRunner {
 
 }
