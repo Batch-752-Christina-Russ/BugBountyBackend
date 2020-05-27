@@ -39,9 +39,7 @@ public class BugReportingStepDefinitions{
 	}
 	
 	@Given("the user is in the Bug Report Page")
-	@Test
 	public void testLoginAndNavigate() {
-		
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get(URL);
@@ -49,8 +47,6 @@ public class BugReportingStepDefinitions{
 		lp = new LoginPage(driver);
 		nb = new Navbar(driver);
 		rbp = new ReportBugPage(driver);
-		
-		
 	    lp.login("Cody", "pass");
 	    WebDriverWait wait = new WebDriverWait(driver, 2);
 		wait.until(ExpectedConditions.urlContains("home"));

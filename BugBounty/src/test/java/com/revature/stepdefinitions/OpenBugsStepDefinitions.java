@@ -1,8 +1,5 @@
 package com.revature.stepdefinitions;
 
-import com.revature.pageobjectmodel.LoginPage;
-import com.revature.pageobjectmodel.HomePage;
-
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -13,6 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
+
+import com.revature.pageobjectmodel.HomePage;
+import com.revature.pageobjectmodel.LoginPage;
 
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
