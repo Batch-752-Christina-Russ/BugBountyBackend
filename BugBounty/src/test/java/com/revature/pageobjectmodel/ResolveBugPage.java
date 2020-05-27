@@ -11,13 +11,13 @@ import org.openqa.selenium.support.PageFactory;
 public class ResolveBugPage {
 	
 	@FindBy(id="bugId")
-	WebElement bugIdInputBox;
+	public WebElement bugIdInputBox;
 	
 	@FindBy(id="username")
-	WebElement resolverInputBox;
+	public WebElement resolverInputBox;
 	
-	@FindBy(css="btn:first-of-type")
-	WebElement resolveBugButton;
+	@FindBy(css="button.btn:first-of-type")
+	public WebElement resolveBugButton;
 	
 	@FindBy(className="col-sm-12 col-md-6 col-lg-4")
 	public List<WebElement> openBugs;

@@ -17,19 +17,14 @@
 ## (Comments)
 #Sample Feature Definition Template
 
-Feature: Resolutions of Problems
-  I want to be able to resolve reported bugs
+Feature: Resolutions
+  I want to be able to resolve reported bugs.
 
-	Background: I am <admin> and want to resolve a bug  
-		Given <admin> is logged in
-	  And <admin> is on the bug resolution page
+	Background: Given I am logged in 
 	  
-	  Scenario: I want to approve a resolution to a bug
-		  Given <bug_report> exists
-		  And <bug_report> has a submitted resolution
-		  When <admin> selects resolve
-		  And <admin> selects <user> for user who resolved
-		  Then  <bug_report> status is resolved
-		  And <user> receives points
+	  Scenario: 
+		  Given I am on resolution page  
+		  When I press resolve
+		  Then  bug_report is resolved 
 	  
   
