@@ -9,10 +9,10 @@ import org.springframework.boot.test.context.SpringBootContextLoader;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.revature.BugBountyApplication;
 import com.revature.model.BugReport;
 import com.revature.pageobjectmodel.LoginPage;
 import com.revature.pageobjectmodel.Navbar;
@@ -26,9 +26,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-@SpringBootTest(classes = BugBountyApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = {"server.port=8080"})
 @ContextConfiguration(loader = SpringBootContextLoader.class)
-public class ResolutionsStepDefinitions  {
+public class ResolutionsStepDefinitions extends AbstractTestNGSpringContextTests  {
 
 	private final String URL = "http://localhost:4200/index";
 	private WebDriver driver;
@@ -82,7 +82,7 @@ public void i_press_resolve() {
 @Test(dependsOnMethods = {"i_press_resolve"})
 public void bug_report_is_resolved() {
    BugReport report = brs.findById(2);
-   report.setStatus("resolved");
+   report.setStatus("resolved"); 
    Assert.assertEquals(report.getStatus(), "resolved");
 }
 
