@@ -26,8 +26,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = {"server.port=8080"})
-@ContextConfiguration(loader = SpringBootContextLoader.class)
 public class ResolutionsStepDefinitions extends AbstractTestNGSpringContextTests  {
 
 	private final String URL = "http://localhost:4200/index";
