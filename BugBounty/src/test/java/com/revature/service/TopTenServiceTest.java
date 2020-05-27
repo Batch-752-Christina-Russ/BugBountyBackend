@@ -60,9 +60,11 @@ public class TopTenServiceTest extends AbstractTestNGSpringContextTests{
 	    top10.add(new User(8, "Jill", "password", 20, role));
 	    top10.add(new User(9, "TooManyUsers", "password", 10, role));
 	    top10.add(new User(10, "Finally", "password", 0, role));
+
 	  
 		//initialize Mockito
 		MockitoAnnotations.initMocks(this);
+
 	}
 	
 	@Test

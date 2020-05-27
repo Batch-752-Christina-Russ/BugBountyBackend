@@ -21,10 +21,45 @@ public class BugReportService {
 	private BugReportRepository bugReportRepository;
 	@Autowired
 	private UserRepository userRepository;
+
+
+	/**
+	* Returns All the BugReport objects on Database.
+	* <p>
+	* This method returns all existing BugReports from the database.
+	*
+	* @return 			BugReport ArrayList of all BugReports that are in the Database.
+	* 
+	*/
+	public List<BugReport> findAllBugReports(){
+		return this.bugReportRepository.findAll();
+	}
 	
+	/**
+	* Returns a BugReport object from the database that matches the id.
+	* <p>
+	* This method returns a BugReport object from the database that has the matching id entered into the method parameter.
+	*
+	* @param id 		id of the BugReport that will be returned from the database
+	* @return 			BugReport that matches id parameter
+	* 
+	*/
+
 	public BugReport findById(int id) {
 		return this.bugReportRepository.findById(id);
 	}
+	
+	
+	/**
+	* Checks if a BugReport has a Null value and if it is not null and is Present returns a boolean based on this check.
+	* <p>
+	* This method saves a new BugReport to the database, it checks if the values are null and if it passes it will save the
+	* new report to the database.
+	*
+	* @param bugReport 		the BugReport that will be checked for in the database.
+	* @return 				result of check if the BugReport is present it will return true
+	* 
+	*/
 	
 	public boolean saveBugReport(BugReport bugReport) {
 		// checks if bugReport is a null value before trying to save it
@@ -35,20 +70,62 @@ public class BugReportService {
 		} else return false;
 	}
 	
+
+	/**
+	* Updates a BugReport Status on the database.
+	* <p>
+	* This method deletes a BugReport from the database that has an id that matches the inputed parameter.
+	*
+	* @param bugReport BugReport to be updated
+	* 
+	*/
+
 	public void updateBugReportStatus(BugReport bugReport) {
 		//this.bugReportRepository.save(bugReport);
 		this.bugReportRepository.updateStatus(bugReport.getId(), bugReport.getStatus());
 	}
+	/**
+	* Deletes a BugReport from the database.
+	* <p>
+	* This method deletes a BugReport from the database that has an id that matches the inputed parameter.
+	*
+	* @param id int value used to find the report in the database and delete it
+	* 
+	*/
 	
 	public void deleteBugReport(int id) {
 		this.bugReportRepository.deleteById(id);
 	}
-
+	
+	/**
+	* Returns an int for the total value of a BugReport.
+	* <p>
+	* This method calls the BugReportRepository to find a BugReport and calculate the total point value the completed
+	* BugReport is worth. It does this by calculating the severity of the problem using calculateSeverityPoints(), 
+	* the time it took to solve that problem using calculateTimePoints(), adding them together and returning the value as an
+	* int.
+	*
+	* @param id int value used to find the report in the database and use that BugReport to calculate the return value
+	* @return static int value obtained from adding the number of days the BugReport was needed to solve and the severity value.
+	* 
+	*/
 	public int sumBugReport(int id) {
 		BugReport br = this.bugReportRepository.findById(id);
 		return this.calculateTimePoints(br) + this.calculateSeverityPoints(br);
 		
 	}
+	
+	/**
+	* Calculates the Severity of a problem into an int for sumBugReport.
+	* <p>
+	* This method takes in a BugReport parameter br, taking the the string value of severity, it returns a value
+	* based on the already established criteria from low to critical.  If there was no value or an imporper string
+	* the method returns 0.
+	*
+	* @param  br BugReport object used to get the severity 
+	* @return static int value based on severity string,  low - 5, med - 15, high - 25, critical - 50, else it will return 0
+	* 
+	*/
 
 	public int calculateSeverityPoints(BugReport br) {
 		//   returns static values for Severity static values for severity low - 5, med - 15, high - 25, critical - 50
@@ -62,10 +139,23 @@ public class BugReportService {
 	}
 	
 
+	/**
+	* Updates the users current score when a new report is submitted.
+	* <p>
+	* This method is used after a new BugReport is submitted, using id parameter to identify the bug report to be calculated
+	*  and the sum of the points from the report are calculated,
+	* with that value it adds it to the user with username that equals username parameter.
+	*
+	* @param  id  id for BugReport object used for getting sum value
+	* @param username username of User to be used to calculate new score
+	* @return returns false if  report is null or if the bug was already resolved. otherwise the BugReport is updated and method returns true
+	* 
+	*/
+	
 	public boolean resolve(int id, String username) {
 		//boolean to check status
 		boolean worked = false;
-		
+
 		//get bug report to update
 		BugReport report = this.findById(id);
 		if(report == null) {
@@ -103,8 +193,8 @@ public class BugReportService {
 	* that have passed between the bugs submission date and the current day. Then cast that as 
 	* an int which represents the number of points to return. Right now one point is rewarded per day.
 	*
-	* @param  a bug report that has just been resolved. It will use it's submit date.
-	* @return      an int equaling the point value of a resolved bug time bonus.
+	* @param bugReportToCheck a bug report that has just been resolved. It will use it's submit date.
+	* @return                 an int equaling the point value of a resolved bug time bonus.
 	*/
 	public int calculateTimePoints(BugReport bugReportToCheck) {
 		Calendar calendar = Calendar.getInstance(); 
@@ -113,8 +203,9 @@ public class BugReportService {
 		return (int) daysBetween;
 	}
 	
-	/**
-	* Finds all BugReports by a given bug status.  
+
+
+	/** Finds all BugReports by a given bug status.  
 	* <p>
 	* This method gets a List of BugReport Objects that have specified status value.  These status are strings 
 	* and can be "open," "pending," or "resolved."  "open" is when a BugReport has been approved by an admin, 
@@ -125,6 +216,7 @@ public class BugReportService {
 	* @param  A String that indicates the wanted BugReport status type.
 	* @return A List of all BugReport Objects with the desired status type.
 	*/
+
 	public List<BugReport> findByStatus(String status){
 		List<BugReport> bugreports = this.bugReportRepository.findAllByStatus(status);
 		for(BugReport b : bugreports) {

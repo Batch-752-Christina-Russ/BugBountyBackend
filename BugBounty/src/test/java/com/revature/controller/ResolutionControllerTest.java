@@ -55,7 +55,7 @@ public class ResolutionControllerTest {
 	}
 	
 	@Test
-	public void ResolutionControllerTest() {
+	public void ControllerTest() {
 		Mockito.when(this.userService.resolve(5, "loki")).thenReturn(true);
 		
 		try {
