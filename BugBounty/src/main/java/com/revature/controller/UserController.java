@@ -29,11 +29,6 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	@GetMapping(path="/test", produces = MediaType.TEXT_HTML_VALUE)
-	public String test() {
-		return ("Hello Devin");
-	}
-	
 	@GetMapping(path="/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getAllUsers() {
 		return this.userService.getAllUsers();
