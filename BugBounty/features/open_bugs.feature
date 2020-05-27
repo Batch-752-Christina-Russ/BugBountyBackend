@@ -18,16 +18,19 @@
 #Sample Feature Definition Template
 
 Feature: Viewing Information
-  I want to view open bugs and a leaderboard
+  I want to view open bugs on the homepage.
 
 Background:
-	Given <user> or <admin> is logged in
+	Given you are in the login page
 
   
-  Scenario: View open bugs
-    Given <user> or <admin> is logged in
-    And number of <bug_report> is not zero
-    And <bug_report> status is approved
-    Then <user> or <admin> can see <open_bug_report_list>
-
+  Scenario: View open bugs as user
+    Given <user> is logged in
+    When <user> attempts to click the first more button
+    Then <user> can see a more descriptive bug report
+    
+   Scenario: View open bugs as admin
+		Given <admin> is logged in
+    When <admin> attempts to click the first more button
+    Then <admin> can see a more descriptive bug report
  
