@@ -1,16 +1,15 @@
 package com.revature.cucumberoptions;
 
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-
 import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
 
-@CucumberOptions(features = "features/open_bugs.feature", 
-glue = "com.revature.stepdefinitions")
-@RunWith(Cucumber.class)
-@SpringBootTest
-public class CucumberTestRunner extends AbstractTestNGSpringContextTests{
+@CucumberOptions(features = {/*"features/bug_reporting.feature",*/ "features/open_bugs.feature"}, 
+glue = "com.revature.stepdefinitions",
+plugin= {
+        "pretty","html:test-outout", 
+        "json:json_output/cucumber.json", 
+        "junit:junit_xml/cucumber.xml"
+    })
+public class CucumberTestRunner extends AbstractTestNGCucumberTests{
 
 }

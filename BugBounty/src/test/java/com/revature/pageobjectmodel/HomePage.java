@@ -27,6 +27,9 @@ public class HomePage {
 	
 	@FindBy(className="btn-secondary")
 	public List<WebElement> closeButton;
+	
+	@FindBy(id = "reportnav")
+	public WebElement reportnav;
 	public Actions act;
 	
 	public HomePage(WebDriver driver) {
@@ -36,6 +39,10 @@ public class HomePage {
 	
 	public void clickMoreButton(int id) {
 		act.click(this.moreButtons.get(id)).perform();
+	}
+	
+	public void clickReportNav() {
+		act.click(this.reportnav).perform();
 	}
 	
 }
