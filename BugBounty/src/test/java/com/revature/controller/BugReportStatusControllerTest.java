@@ -68,9 +68,8 @@ public class BugReportStatusControllerTest {
 		
 		when(this.bugReportService.findByStatus("pending")).thenReturn(bg);	
 		try {
-			
-			
-			mockMVC.perform(get("/bugreport/" + "pending"))
+		
+			mockMVC.perform(get("/bugreport/pending"))
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 			.andDo(print())

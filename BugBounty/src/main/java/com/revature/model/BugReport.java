@@ -102,6 +102,16 @@ public class BugReport {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+
+	/**
+	* Converts BugReport object values into Hashcode
+	* <p>
+	* This method is used to convert the values of the selected BugReport into Hash Code and returns those values as an int.
+	*
+	* @return returns int value from hashcode
+	* 
+	*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -118,6 +128,15 @@ public class BugReport {
 		result = prime * result + ((steps == null) ? 0 : steps.hashCode());
 		return result;
 	}
+	/**
+	* Returns a boolean if this BugReport equals in value to the parameter entered
+	* <p>
+	* This method is used to check if the BugReport is equal to object and checking if the obj is null.
+	* 
+	* @param  obj  object that is to be compared to instance of BugReport class
+	* @return true if BugReport equals parameter, obj is not null, and value of BugReport equals value of parameter,
+	* 
+	*/
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -176,12 +195,37 @@ public class BugReport {
 			return false;
 		return true;
 	}
+	
+	/**
+	* Converts BugReport object into a String
+	* <p>
+	* This method overrides the toString method to output proper format for webpages.
+	*
+	* @return BugReport instance as a String.
+	* 
+	*/
 	@Override
 	public String toString() {
 		return "BugReport [id=" + id + ", reporter=" + reporter + ", resolver=" + resolver + ", application="
 				+ application + ", location=" + location + ", description=" + description + ", steps=" + steps
 				+ ", severity=" + severity + ", date=" + date + ", status=" + status + "]";
 	}
+	
+	/**
+	* Constructs BugReport with a resolver.
+	* <p>
+	* This constructor creates a BugReport with both a resolver and reporter, this is used for when a BugReport is resolved by a user.
+	*  @param id			id of BugReport for the Database
+	*  @param reporter		user that submitted BugReport
+	*  @param resolver		user that fixed the bug in the program
+	*  @param application	name of project the bug was found in
+	*  @param location		location of bug in the document
+	*  @param description	description of the bug problem
+	*  @param steps			steps required to solve bug
+	*  @param severity  	ranking of how important the bug is that needs to be fixed
+	*  @param date   		date of creation of report
+	*  @param status 		current status of report by default pending
+	*/
 	public BugReport(int id, User reporter, User resolver, String application, String location, String description,
 			String steps, String severity, Date date, String status) {
 		super();
@@ -196,6 +240,21 @@ public class BugReport {
 		this.date = date;
 		this.status = status;
 	}
+	
+	/**
+	* Constructs BugReport without a resolver.
+	* <p>
+	* This constructor creates a BugReport without a resolver and reporter, this is used for creating a completely new BugReport for submission.
+	*  @param id			id of BugReport for the Database
+	*  @param reporter		user that submitted BugReport
+	*  @param application	name of project the bug was found in
+	*  @param location		location of bug in the document
+	*  @param description	description of the bug problem
+	*  @param steps			steps required to solve bug
+	*  @param severity  	ranking of how important the bug is that needs to be fixed
+	*  @param date   		date of creation of report
+	*  @param status 		current status of report by default pending
+	*/
 	public BugReport(int id, User reporter, String application, String location, String description,
 			String steps, String severity, Date date, String status) {
 		super();
