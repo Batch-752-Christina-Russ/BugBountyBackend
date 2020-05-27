@@ -1,36 +1,14 @@
-#Author: your.email@your.domain.com
-#Keywords Summary :
-#Feature: List of scenarios.
-#Scenario: Business rule through list of steps with arguments.
-#Given: Some precondition step
-#When: Some key actions
-#Then: To observe outcomes or validation
-#And,But: To enumerate more Given,When,Then steps
-#Scenario Outline: List of steps for data-driven as an Examples and <placeholder>
-#Examples: Container for s table
-#Background: List of steps run before each of the scenarios
-#""" (Doc Strings)
-#| (Data Tables)
-#@ (Tags/Labels):To group Scenarios
-#<> (placeholder)
-#""
-## (Comments)
-#Sample Feature Definition Template
-
-Feature: Viewing Information
-  I want to view open bugs on the homepage.
+Feature: Open Bugs on Homepage
 
 Background:
 	Given you are in the login page
-
   
-  Scenario: View open bugs as user
+  Scenario: I want to view open bugs as user
     Given <user> is logged in
     When <user> attempts to click the first more button
     Then <user> can see a more descriptive bug report
     
-   Scenario: View open bugs as admin
+   Scenario: I want to view open bugs as admin
 		Given <admin> is logged in
     When <admin> attempts to click the first more button
     Then <admin> can see a more descriptive bug report
- 

@@ -1,10 +1,7 @@
 package com.revature.stepdefinitions;
 
 import com.revature.pageobjectmodel.LoginPage;
-import com.revature.pageobjectmodel.Navbar;
 import com.revature.pageobjectmodel.HomePage;
-
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,11 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import cucumber.api.java.Before;
@@ -26,20 +20,15 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 
-public class OpenBugsStepDefinitions extends AbstractTestNGSpringContextTests{
+public class OpenBugsStepDefinitions{
 
 	private final String URL = "http://localhost:4200";
 	private WebDriver driver;
 	private LoginPage lp;
 	private HomePage hp;
-	private Navbar nb;
 
 	@Before
 	public void setup() {
-		/*
-		 * System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-		 * driver = new ChromeDriver(); driver.get(URL); lp = new LoginPage(driver);
-		 */
 	}
 
 	@Given("you are in the login page")
@@ -51,9 +40,7 @@ public class OpenBugsStepDefinitions extends AbstractTestNGSpringContextTests{
 		driver.manage().window().maximize();
 		lp = new LoginPage(driver);
 		hp = new HomePage(driver);
-		nb = new Navbar(driver);
 		
-
 		Assert.assertEquals(driver.getCurrentUrl(), "http://localhost:4200/index");
 	}
 
@@ -77,17 +64,22 @@ public class OpenBugsStepDefinitions extends AbstractTestNGSpringContextTests{
 	public void testUserCheckModal() { 
 		
 		Assert.assertNotNull(this.driver.findElement(By.className("modal-content")));
-		this.driver.findElement(By.className("btn-secondary")).click();
-		nb.clickLogoutNav();
+		try {
+			TimeUnit.SECONDS.sleep(4);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		driver.close();
 	}
 	
 	
 	@Given("<admin> is logged in")
 	@Test(dependsOnMethods = "testUserCheckModal")
 	public void testAdminLoggingIn() {
+		Assert.assertEquals(driver.getCurrentUrl(), "http://localhost:4200/index");
+
 		lp.login("Admin", "pass");
 
-		Assert.assertEquals(driver.getCurrentUrl(), "http://localhost:4200/index");
 	}
 
 	@When("<admin> attempts to click the first more button") 
@@ -101,20 +93,22 @@ public class OpenBugsStepDefinitions extends AbstractTestNGSpringContextTests{
 	@Then("<admin> can see a more descriptive bug report") 
 	@Test(dependsOnMethods = "testAdminClickMore")
 	public void testAdminCheckModal() { 
-		
 		Assert.assertNotNull(this.driver.findElement(By.className("modal-content")));
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		// Close the browser.
+		driver.quit();
 		
 	}
 
 	@AfterClass
 	public void tearDown() {
 
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		driver.quit();
+
 	}
 
 }

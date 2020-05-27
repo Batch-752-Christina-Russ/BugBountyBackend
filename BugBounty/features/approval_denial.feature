@@ -1,5 +1,4 @@
-
-Feature: I want to approve and deny bug request
+Feature: Approve and Deny Bug Requests
 
  	Background: Given "admin" is logged in
 	 	Given I navigate to the login page

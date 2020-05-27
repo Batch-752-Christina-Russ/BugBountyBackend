@@ -6,14 +6,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.revature.pageobjectmodel.LoginPage;
-import com.revature.pageobjectmodel.Navbar;
-import com.revature.pageobjectmodel.PendingBugPage;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
@@ -21,8 +17,6 @@ public class LeaderboardStepDefinitions {
 	private WebDriver driver;
 	private final String URL = "localhost:4200/";
 	private LoginPage loginPage;
-	private Navbar navbar;
-	private PendingBugPage pendingBugPage;
 
 	@Test
 	@Given("<user> or <admin> is logged in")

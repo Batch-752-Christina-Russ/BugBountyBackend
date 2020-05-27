@@ -8,21 +8,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.revature.pageobjectmodel.LoginPage;
 import com.revature.pageobjectmodel.Navbar;
-import com.revature.pageobjectmodel.PendingBugPage;
-
-import cucumber.api.PendingException;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.But;
 
 public class ApprovalDenialStepDefinitions {
 	
@@ -30,8 +23,6 @@ public class ApprovalDenialStepDefinitions {
 	private final String URL = "localhost:4200/";
 	private LoginPage loginPage;
 	private Navbar navbar;
-	private PendingBugPage pendingBugPage;
-
 
 	@Test
 	@Given("I navigate to the login page")
@@ -123,8 +114,6 @@ public class ApprovalDenialStepDefinitions {
 
 	@AfterClass
 	public void tearDown() {
-		//This is here so that we can actually see what happens when the script
-		//is running as it tends to move pretty fast.
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
