@@ -17,10 +17,12 @@
 ## (Comments)
 #Sample Feature Definition Template
 
+
 Feature: General Reporting
   I want to report bugs
 
 Background: Given <user> is signed in
+
 
   Scenario: I want to submit a Bug Report
 	  Given the user is in the Bug Report Page

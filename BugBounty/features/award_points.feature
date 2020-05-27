@@ -16,6 +16,8 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
+
+
 Feature: User is awarded points for bugs they resolve
 
 	Scenario: User receives points

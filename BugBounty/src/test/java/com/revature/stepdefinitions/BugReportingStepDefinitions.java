@@ -40,8 +40,12 @@ public class BugReportingStepDefinitions extends AbstractTestNGSpringContextTest
 	private BugReportService bugReportService;
 
 	@Before
-	public void setUp() {
+	public void setUp() {	
 		
+	}
+	
+	@Given("the user is in the Bug Report Page")
+	public void testLoginAndNavigate() {
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get(URL);
@@ -49,12 +53,6 @@ public class BugReportingStepDefinitions extends AbstractTestNGSpringContextTest
 		lp = new LoginPage(driver);
 		hp = new HomePage(driver);
 		rbp = new ReportBugPage(driver);
-		
-	}
-	
-	@Given("the user is in the Bug Report Page")
-	public void testLoginAndNavigate() {
-		
 		
 	    lp.login("Cody", "pass");
 	    WebDriverWait wait = new WebDriverWait(driver, 2);

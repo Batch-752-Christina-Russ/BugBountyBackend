@@ -41,29 +41,31 @@ public class ResolutionsStepDefinitions extends AbstractTestNGSpringContextTests
 	private Navbar navPom;
 	private ResolveBugPage resolvePom;
 
-	@Before
-	public void setUp() {
-		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.get(URL);
-		
-		//poms
-		loginPom = new LoginPage(driver);
-		navPom = new Navbar(driver);
-		resolvePom = new ResolveBugPage(driver);
-		
-		//login and go to resolution page
-		loginPom.login("Admin", "pass");
-		WebDriverWait wait = new WebDriverWait(driver, 2);
-		wait.until(ExpectedConditions.urlToBe("http://localhost:4200/home"));
-		navPom.clickResolveNav();
-		wait.until(ExpectedConditions.urlContains("resolve"));
-	}
+//	@Before
+//	public void setUp() {
+//
+//	}
 
 
 @Given("I am on resolution page")
 @Test
 public void i_am_on_resolution_page() {
+	System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+	driver = new ChromeDriver();
+	driver.get(URL);
+	
+	//poms
+	loginPom = new LoginPage(driver);
+	navPom = new Navbar(driver);
+	resolvePom = new ResolveBugPage(driver);
+	
+	//login and go to resolution page
+	loginPom.login("Admin", "pass");
+	WebDriverWait wait = new WebDriverWait(driver, 2);
+	wait.until(ExpectedConditions.urlToBe("http://localhost:4200/home"));
+	navPom.clickResolveNav();
+	wait.until(ExpectedConditions.urlContains("resolve"));
+	
    //must be on resolve page
 	String current = driver.getCurrentUrl();
 	Assert.assertEquals(current, "http://localhost:4200/resolvebug"); 

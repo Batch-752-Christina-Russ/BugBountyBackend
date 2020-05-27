@@ -5,7 +5,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 
-@CucumberOptions(features = {/*"features/bug_reporting.feature",*/ "features/open_bugs.feature"}, 
+@CucumberOptions(features = "features/bug_reporting.feature"/*, "features/open_bugs.feature"*/, 
 glue = "com.revature.stepdefinitions",
 plugin= {
         "pretty","html:test-outout", 

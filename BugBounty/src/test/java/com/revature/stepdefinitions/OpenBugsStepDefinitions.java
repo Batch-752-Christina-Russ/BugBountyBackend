@@ -1,24 +1,18 @@
 package com.revature.stepdefinitions;
 
-import com.revature.pageobjectmodel.LoginPage;
-import com.revature.pageobjectmodel.Navbar;
-import com.revature.pageobjectmodel.HomePage;
-
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import com.revature.pageobjectmodel.HomePage;
+import com.revature.pageobjectmodel.LoginPage;
+import com.revature.pageobjectmodel.Navbar;
 
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -34,13 +28,13 @@ public class OpenBugsStepDefinitions extends AbstractTestNGSpringContextTests{
 	private HomePage hp;
 	private Navbar nb;
 
-	@Before
-	public void setup() {
-		/*
-		 * System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-		 * driver = new ChromeDriver(); driver.get(URL); lp = new LoginPage(driver);
-		 */
-	}
+//	@Before
+//	public void setup() {
+//		/*
+//		 * System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+//		 * driver = new ChromeDriver(); driver.get(URL); lp = new LoginPage(driver);
+//		 */
+//	}
 
 	@Given("you are in the login page")
 	public void testLoginPage() {

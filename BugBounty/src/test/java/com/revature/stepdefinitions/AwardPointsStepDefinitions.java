@@ -38,8 +38,15 @@ public class AwardPointsStepDefinitions extends AbstractTestNGSpringContextTests
 	private User user;
 	private BugReport bug;
 	
-	@Before
-	public void setUp() {
+//	@Before
+//	public void setUp() {
+//		
+//		
+//	}
+	
+	@Given("<bug_report> is resolved")
+	@Test
+	public void bug_report_is_resolved() {
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get("http://localhost:4200/index");
@@ -49,11 +56,6 @@ public class AwardPointsStepDefinitions extends AbstractTestNGSpringContextTests
 		bug.setStatus("resolved");
 		bug.setResolver(user);
 		
-	}
-	
-	@Given("<bug_report> is resolved")
-	@Test
-	public void bug_report_is_resolved() {
 		//Assert that bug report resolved 
 		WebDriverWait wait = new WebDriverWait(driver, 4);
 		wait.until(ExpectedConditions.elementToBeClickable(login.loginButton));
