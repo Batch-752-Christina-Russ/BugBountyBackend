@@ -23,8 +23,9 @@ Feature: General Reporting
 Background: Given <user> is signed in
 
   Scenario: I want to submit a Bug Report
-	  Given <user> fills out the entire form
-	  When <user> submits the form
+	  Given the user is in the Bug Report Page
+	  When <user> fills out the entire form
+	  And <user> submits the form
 	  Then the application saves the report
  
 

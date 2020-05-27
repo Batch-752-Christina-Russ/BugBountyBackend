@@ -1,13 +1,18 @@
 package com.revature.cucumberoptions;
 
-import org.junit.runner.RunWith;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
 
-@CucumberOptions(features = "features/approve_denial.feature", 
-glue = "com.revature.stepdefinitions/ApproveDenialStepDefinitions" )
-@RunWith(Cucumber.class)
-public class CucumberTestRunner {
+
+@CucumberOptions(features = {/*"features/bug_reporting.feature",*/ "features/open_bugs.feature"}, 
+glue = "com.revature.stepdefinitions",
+plugin= {
+        "pretty","html:test-outout", 
+        "json:json_output/cucumber.json", 
+        "junit:junit_xml/cucumber.xml"
+    })
+public class CucumberTestRunner extends AbstractTestNGCucumberTests{
+
 
 }
